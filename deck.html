@@ -2556,7 +2556,7 @@
               gsap.set(".cover .image-slot", { opacity: 0.48, y: 0 });
               gsap.set(".ambient-hairline", { opacity: 0.55, scaleX: 1 });
             }
-            return gsap.timeline();
+            return null;
           }
           var tl = gsap.timeline();
           tl.to(".cover .wordmark-wrap", { opacity: 1, y: 0, duration: 0.72, ease: "power2.out" }, 0);
