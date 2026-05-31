@@ -16,12 +16,12 @@
     <style>
       :root {
         color-scheme: light;
-        --bg: #faf8f1;
-        --ink: #080806;
-        --soft-ink: rgba(8, 8, 6, 0.48);
-        --mid-ink: rgba(8, 8, 6, 0.7);
-        --hairline: rgba(8, 8, 6, 0.18);
-        --warm-shadow: rgba(55, 39, 22, 0.08);
+        --bg: #f3ece0;
+        --ink: #1a1510;
+        --soft-ink: rgba(26, 21, 16, 0.5);
+        --mid-ink: rgba(26, 21, 16, 0.72);
+        --hairline: rgba(26, 21, 16, 0.16);
+        --warm-shadow: rgba(80, 50, 25, 0.12);
         --serif: "EB Garamond", Garamond, Georgia, "Songti SC", "Noto Serif CJK SC", serif;
         --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", sans-serif;
       }
@@ -62,12 +62,12 @@
         inset: 0;
         z-index: 0;
         pointer-events: none;
-        opacity: 0.22;
+        opacity: 0.45;
         background-image:
           linear-gradient(var(--warm-shadow) 1px, transparent 1px),
           linear-gradient(90deg, var(--warm-shadow) 1px, transparent 1px);
         background-size: 47px 47px;
-        mask-image: radial-gradient(circle at center, transparent 0, rgba(0, 0, 0, 0.22) 72%);
+        mask-image: radial-gradient(circle at center, transparent 0, rgba(0, 0, 0, 0.35) 72%);
       }
 
       .slide {
@@ -1848,13 +1848,22 @@
           gap: 8px;
         }
 
+        .questionnaire-slide {
+          grid-template-columns: 1fr;
+          grid-template-rows: auto 1fr;
+          gap: 24px;
+          align-items: start;
+        }
+
         .questionnaire-gallery {
-          min-height: min(64vh, 620px);
-          padding: 22px 24vw 30px 20px;
+          min-height: 38vh;
+          max-height: 42vh;
+          padding: 16px 28vw 24px 12px;
         }
 
         .questionnaire-copy {
-          max-width: 72vw;
+          max-width: 100%;
+          padding-right: 0;
         }
 
         .questionnaire-copy .title-large {
