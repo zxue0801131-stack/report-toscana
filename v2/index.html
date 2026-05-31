@@ -1,0 +1,2735 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>汇报</title>
+    <meta name="description" content="海外800㎡别墅客户方案汇报" />
+    <meta name="application-name" content="汇报" />
+    <meta name="apple-mobile-web-app-title" content="汇报" />
+    <meta name="theme-color" content="#faf8f1" />
+    <meta property="og:title" content="汇报" />
+    <meta property="og:description" content="海外800㎡别墅客户方案汇报" />
+    <meta property="og:site_name" content="汇报" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
+    <base href="../" />
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f3ece0;
+        --ink: #1a1510;
+        --soft-ink: rgba(26, 21, 16, 0.5);
+        --mid-ink: rgba(26, 21, 16, 0.72);
+        --hairline: rgba(26, 21, 16, 0.16);
+        --warm-shadow: rgba(80, 50, 25, 0.12);
+        --serif: "EB Garamond", Garamond, Georgia, "Songti SC", "Noto Serif CJK SC", serif;
+        --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: var(--serif);
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+
+      button {
+        font: inherit;
+      }
+
+      .deck {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        height: 100dvh;
+        overflow: hidden;
+        background: var(--bg);
+      }
+
+      .plaster-grain {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        opacity: 0.45;
+        background-image:
+          linear-gradient(var(--warm-shadow) 1px, transparent 1px),
+          linear-gradient(90deg, var(--warm-shadow) 1px, transparent 1px);
+        background-size: 47px 47px;
+        mask-image: radial-gradient(circle at center, transparent 0, rgba(0, 0, 0, 0.35) 72%);
+      }
+
+      .slide {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        display: grid;
+        width: 100%;
+        height: 100%;
+        padding: clamp(28px, 5vw, 82px) clamp(28px, 5vw, 82px)
+          calc(clamp(28px, 5vw, 82px) + 74px);
+        overflow-x: hidden;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        opacity: 0;
+        pointer-events: none;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(8, 8, 6, 0.2) transparent;
+      }
+
+      .slide::-webkit-scrollbar {
+        width: 7px;
+      }
+
+      .slide::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      .slide::-webkit-scrollbar-thumb {
+        background: rgba(8, 8, 6, 0.18);
+        border-radius: 99px;
+      }
+
+      .slide.is-active {
+        z-index: 2;
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .top-meta {
+        position: fixed;
+        z-index: 10;
+        top: max(24px, env(safe-area-inset-top));
+        right: max(28px, env(safe-area-inset-right));
+        display: flex;
+        gap: 9px;
+        align-items: baseline;
+        font-size: clamp(13px, 1vw, 18px);
+        line-height: 1;
+        color: var(--ink);
+      }
+
+      .top-meta span:last-child {
+        color: var(--soft-ink);
+      }
+
+      .brand-signature {
+        position: fixed;
+        z-index: 12;
+        top: max(26px, env(safe-area-inset-top));
+        left: max(32px, env(safe-area-inset-left));
+        font-family: var(--sans);
+        font-size: clamp(15px, 1.08vw, 20px);
+        line-height: 1;
+        letter-spacing: 0.02em;
+        color: var(--ink);
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .cover {
+        place-items: center;
+      }
+
+      .wordmark-wrap {
+        position: relative;
+        z-index: 2;
+        display: inline-flex;
+        align-items: baseline;
+        justify-content: center;
+        min-width: min(92vw, 12ch);
+        font-size: clamp(78px, 12.4vw, 228px);
+        line-height: 0.92;
+        font-weight: 400;
+        letter-spacing: 0;
+        font-feature-settings: "liga" 1, "kern" 1;
+        will-change: transform, opacity;
+      }
+
+      .wordmark {
+        min-width: 0;
+        white-space: nowrap;
+      }
+
+      .comma-shell {
+        position: relative;
+        display: inline-flex;
+        width: 0.4em;
+        height: 0.76em;
+        margin-left: 0.015em;
+        align-items: flex-end;
+        justify-content: center;
+        opacity: 0;
+        will-change: transform, opacity;
+      }
+
+      .comma-svg {
+        width: 0.34em;
+        height: 0.48em;
+        overflow: visible;
+      }
+
+      .comma-mark {
+        fill: none;
+        stroke: var(--ink);
+        stroke-width: 8.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        transform-origin: 50% 35%;
+      }
+
+      .cover-copy {
+        position: absolute;
+        z-index: 3;
+        left: 50%;
+        bottom: 17vh;
+        width: min(760px, 78vw);
+        transform: translateX(-50%);
+        text-align: center;
+        pointer-events: none;
+      }
+
+      .cover-title {
+        margin: 0;
+        font-size: clamp(25px, 2.55vw, 46px);
+        line-height: 1.08;
+        font-weight: 400;
+        letter-spacing: 0;
+      }
+
+      .cover-subtitle {
+        margin: 16px 0 0;
+        font-size: clamp(17px, 1.25vw, 22px);
+        line-height: 1.35;
+        color: var(--soft-ink);
+        font-style: italic;
+      }
+
+      .cover-footer {
+        position: fixed;
+        z-index: 4;
+        left: max(34px, env(safe-area-inset-left));
+        right: max(34px, env(safe-area-inset-right));
+        bottom: max(98px, calc(env(safe-area-inset-bottom) + 98px));
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 24px;
+        font-size: clamp(13px, 1vw, 18px);
+        line-height: 1;
+        color: var(--soft-ink);
+      }
+
+      .ambient-hairline {
+        position: absolute;
+        left: 50%;
+        bottom: 7.5vh;
+        width: min(420px, 38vw);
+        height: 1px;
+        background: var(--hairline);
+        transform: translateX(-50%) scaleX(1);
+        transform-origin: center;
+      }
+
+      .image-slots {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .image-slot {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--hairline);
+        color: rgba(8, 8, 6, 0.56);
+        font-size: clamp(14px, 1.15vw, 20px);
+        font-style: italic;
+        letter-spacing: 0;
+        overflow: hidden;
+        background: rgba(250, 248, 241, 0.42);
+      }
+
+      .image-slot::before {
+        content: "";
+        position: absolute;
+        inset: 12px;
+        border: 1px solid rgba(8, 8, 6, 0.08);
+      }
+
+      .image-slot span {
+        position: relative;
+        z-index: 1;
+      }
+
+      .slot-garden {
+        width: min(23vw, 360px);
+        aspect-ratio: 4 / 5;
+        left: 7vw;
+        top: 14vh;
+      }
+
+      .slot-material {
+        width: min(17vw, 265px);
+        aspect-ratio: 1 / 1;
+        right: 8.5vw;
+        top: 17vh;
+      }
+
+      .slot-furniture {
+        width: min(31vw, 500px);
+        aspect-ratio: 16 / 7;
+        right: 8.5vw;
+        bottom: 15vh;
+      }
+
+      .story,
+      .principles {
+        grid-template-columns: minmax(310px, 0.9fr) minmax(540px, 1.1fr);
+        gap: clamp(54px, 7vw, 136px);
+        align-items: center;
+        padding: 10vh 8vw 9vh;
+      }
+
+      .kicker {
+        margin: 0 0 22px;
+        font-size: clamp(14px, 1vw, 18px);
+        line-height: 1;
+        color: var(--soft-ink);
+        font-style: italic;
+      }
+
+      .title-large {
+        margin: 0;
+        font-size: clamp(66px, 8.3vw, 148px);
+        line-height: 0.92;
+        font-weight: 400;
+        letter-spacing: 0;
+      }
+
+      .note {
+        width: min(24em, 100%);
+        margin: 36px 0 0;
+        font-size: clamp(21px, 1.65vw, 30px);
+        line-height: 1.28;
+        color: var(--soft-ink);
+      }
+
+      .rule {
+        width: min(360px, 70%);
+        height: 1px;
+        margin-top: 38px;
+        background: var(--hairline);
+        transform-origin: left;
+      }
+
+      .stack {
+        display: flex;
+        flex-direction: column;
+        gap: clamp(24px, 3vh, 38px);
+      }
+
+      .item {
+        display: grid;
+        grid-template-columns: 58px 1fr;
+        gap: 28px;
+        align-items: start;
+      }
+
+      .num {
+        padding-top: 0.18em;
+        font-size: clamp(20px, 1.45vw, 28px);
+        line-height: 1;
+        color: var(--soft-ink);
+        font-style: italic;
+      }
+
+      .item h2 {
+        margin: 0 0 9px;
+        font-size: clamp(28px, 2.15vw, 40px);
+        line-height: 1.08;
+        font-weight: 400;
+      }
+
+      .item p {
+        margin: 0;
+        max-width: 35em;
+        font-size: clamp(18px, 1.18vw, 22px);
+        line-height: 1.52;
+        color: var(--mid-ink);
+      }
+
+      .stack.compact {
+        gap: clamp(18px, 2.2vh, 28px);
+      }
+
+      .item.compact {
+        grid-template-columns: 52px 1fr;
+        gap: 22px;
+      }
+
+      .item.compact h2 {
+        font-size: clamp(24px, 1.8vw, 34px);
+      }
+
+      .item.compact p {
+        font-size: clamp(16px, 1.05vw, 20px);
+        line-height: 1.46;
+      }
+
+      .brief-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .metric {
+        min-height: 154px;
+        padding: 24px 24px 22px;
+        border-top: 1px solid var(--hairline);
+      }
+
+      .metric strong {
+        display: block;
+        margin-bottom: 16px;
+        font-size: clamp(34px, 3.2vw, 58px);
+        line-height: 0.92;
+        font-weight: 400;
+      }
+
+      .metric span {
+        display: block;
+        font-size: clamp(16px, 1.12vw, 20px);
+        line-height: 1.38;
+        color: var(--mid-ink);
+      }
+
+      .quote {
+        width: min(36em, 100%);
+        margin-top: 34px;
+        padding-top: 26px;
+        border-top: 1px solid var(--hairline);
+        font-size: clamp(18px, 1.35vw, 25px);
+        line-height: 1.38;
+        color: var(--mid-ink);
+      }
+
+      .material-board {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .material-card {
+        min-height: 176px;
+        padding: 24px;
+        border: 1px solid var(--hairline);
+        background: rgba(250, 248, 241, 0.38);
+      }
+
+      .material-card h2 {
+        margin: 0 0 14px;
+        font-size: clamp(25px, 1.9vw, 36px);
+        line-height: 1.05;
+        font-weight: 400;
+      }
+
+      .material-card p {
+        margin: 0;
+        font-size: clamp(16px, 1.05vw, 20px);
+        line-height: 1.48;
+        color: var(--mid-ink);
+      }
+
+      .route {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .route-step {
+        min-height: 278px;
+        padding: 24px 20px;
+        border-left: 1px solid var(--hairline);
+      }
+
+      .route-step span {
+        display: block;
+        margin-bottom: 42px;
+        color: var(--soft-ink);
+        font-size: clamp(18px, 1.25vw, 24px);
+        font-style: italic;
+      }
+
+      .route-step h2 {
+        margin: 0 0 16px;
+        font-size: clamp(25px, 1.9vw, 35px);
+        line-height: 1.08;
+        font-weight: 400;
+      }
+
+      .route-step p {
+        margin: 0;
+        font-size: clamp(16px, 1.03vw, 19px);
+        line-height: 1.48;
+        color: var(--mid-ink);
+      }
+
+      .map-slide {
+        grid-template-columns: minmax(500px, 0.94fr) minmax(610px, 1.06fr);
+        gap: clamp(42px, 4.6vw, 84px);
+        align-items: center;
+        padding: 8vh 7vw calc(8vh + 74px);
+      }
+
+      .map-copy {
+        max-width: 44em;
+      }
+
+      .map-copy .title-large {
+        font-size: clamp(58px, 6.6vw, 120px);
+      }
+
+      .map-copy .note {
+        width: min(38em, 100%);
+        margin-top: 28px;
+        font-size: clamp(17px, 1.05vw, 21px);
+        line-height: 1.5;
+      }
+
+      .map-copy .quote {
+        width: min(40em, 100%);
+        margin-top: 22px;
+        padding-top: 18px;
+        font-size: clamp(17px, 1.12vw, 22px);
+        line-height: 1.38;
+      }
+
+      .map-canvas {
+        position: relative;
+        min-height: 610px;
+      }
+
+      .map-ring {
+        position: absolute;
+        inset: 64px 78px 78px;
+        border: 1px solid rgba(8, 8, 6, 0.14);
+        border-radius: 50%;
+      }
+
+      .map-line {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 38%;
+        height: 1px;
+        background: rgba(8, 8, 6, 0.16);
+        transform-origin: left center;
+      }
+
+      .map-line.line-1 {
+        transform: rotate(-150deg);
+      }
+
+      .map-line.line-2 {
+        transform: rotate(-62deg);
+      }
+
+      .map-line.line-3 {
+        transform: rotate(18deg);
+      }
+
+      .map-line.line-4 {
+        transform: rotate(98deg);
+      }
+
+      .map-node {
+        position: absolute;
+        display: grid;
+        width: clamp(146px, 10vw, 184px);
+        min-height: clamp(146px, 10vw, 184px);
+        place-items: center;
+        padding: 16px;
+        border: 1px solid rgba(8, 8, 6, 0.2);
+        border-radius: 50%;
+        background: rgba(250, 248, 241, 0.74);
+        text-align: center;
+      }
+
+      .map-node strong {
+        display: block;
+        font-size: clamp(21px, 1.55vw, 31px);
+        line-height: 1.04;
+        font-weight: 400;
+      }
+
+      .map-node span {
+        display: block;
+        margin-top: 8px;
+        font-size: clamp(12px, 0.82vw, 15px);
+        line-height: 1.22;
+        color: var(--soft-ink);
+      }
+
+      .map-node.center {
+        left: 50%;
+        top: 50%;
+        width: clamp(176px, 12vw, 224px);
+        min-height: clamp(176px, 12vw, 224px);
+        transform: translate(-50%, -50%);
+      }
+
+      .map-node.before {
+        left: 2%;
+        top: 42%;
+      }
+
+      .map-node.art {
+        left: 24%;
+        top: 4%;
+      }
+
+      .map-node.arch {
+        right: 2%;
+        top: 30%;
+      }
+
+      .map-node.toscana {
+        left: 40%;
+        bottom: 5%;
+      }
+
+      .feature-strip {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .feature {
+        min-height: 230px;
+        padding: 22px 18px;
+        border-left: 1px solid var(--hairline);
+      }
+
+      .feature h2 {
+        margin: 0 0 20px;
+        font-size: clamp(27px, 2vw, 38px);
+        line-height: 1.04;
+        font-weight: 400;
+      }
+
+      .feature p {
+        margin: 0;
+        font-size: clamp(16px, 1.03vw, 19px);
+        line-height: 1.48;
+        color: var(--mid-ink);
+      }
+
+      .feature-detail-slide {
+        display: block;
+        padding: 8vh 7vw calc(12vh + 74px);
+      }
+
+      .feature-detail-head {
+        display: grid;
+        grid-template-columns: minmax(420px, 0.8fr) minmax(520px, 1.2fr);
+        gap: clamp(42px, 6vw, 112px);
+        align-items: end;
+      }
+
+      .feature-detail-head h1 {
+        margin: 0;
+        font-size: clamp(58px, 7.2vw, 132px);
+        line-height: 0.94;
+        font-weight: 400;
+      }
+
+      .feature-detail-head h1 span {
+        display: block;
+      }
+
+      .feature-detail-head p {
+        margin: 0 0 10px;
+        font-size: clamp(19px, 1.45vw, 27px);
+        line-height: 1.38;
+        color: var(--soft-ink);
+      }
+
+      .feature-detail-list {
+        display: grid;
+        gap: 52px;
+        margin-top: 58px;
+      }
+
+      .feature-detail {
+        display: grid;
+        grid-template-columns: minmax(128px, 0.22fr) minmax(0, 1fr);
+        gap: clamp(28px, 4vw, 72px);
+        padding-top: 34px;
+        border-top: 1px solid var(--hairline);
+      }
+
+      .feature-symbol {
+        font-size: clamp(72px, 7.5vw, 138px);
+        line-height: 0.9;
+        color: rgba(8, 8, 6, 0.18);
+      }
+
+      .feature-body h2 {
+        margin: 0 0 20px;
+        font-size: clamp(36px, 3.2vw, 62px);
+        line-height: 1;
+        font-weight: 400;
+      }
+
+      .feature-body p {
+        width: min(58em, 100%);
+        margin: 0 0 14px;
+        font-size: clamp(17px, 1.13vw, 21px);
+        line-height: 1.58;
+        color: var(--mid-ink);
+      }
+
+      .feature-body blockquote {
+        width: min(48em, 100%);
+        margin: 22px 0;
+        padding: 0 0 0 22px;
+        border-left: 1px solid var(--hairline);
+        color: var(--ink);
+        font-size: clamp(20px, 1.45vw, 28px);
+        line-height: 1.35;
+        font-weight: 400;
+      }
+
+      .transfer {
+        width: min(58em, 100%);
+        margin-top: 24px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(8, 8, 6, 0.12);
+      }
+
+      .transfer h3 {
+        margin: 0 0 14px;
+        color: var(--soft-ink);
+        font-size: clamp(17px, 1.12vw, 22px);
+        line-height: 1;
+        font-weight: 400;
+        font-style: italic;
+      }
+
+      .transfer-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 14px;
+      }
+
+      .transfer-tags span {
+        padding: 7px 12px 8px;
+        border: 1px solid rgba(8, 8, 6, 0.16);
+        font-size: clamp(15px, 0.98vw, 18px);
+        line-height: 1;
+        color: rgba(8, 8, 6, 0.72);
+      }
+
+      .question-slide {
+        grid-template-columns: minmax(300px, 0.7fr) minmax(640px, 1.3fr);
+        gap: clamp(54px, 7vw, 130px);
+        align-items: center;
+        padding: 9vh 8vw;
+      }
+
+      .question-mark {
+        font-size: clamp(250px, 30vw, 540px);
+        line-height: 0.8;
+        color: rgba(8, 8, 6, 0.09);
+      }
+
+      .questions {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px 30px;
+      }
+
+      .question-item {
+        padding-top: 18px;
+        border-top: 1px solid var(--hairline);
+        font-size: clamp(19px, 1.32vw, 25px);
+        line-height: 1.32;
+        color: var(--mid-ink);
+      }
+
+      .survey-sheet {
+        display: grid;
+        gap: 18px;
+        padding: 34px 38px;
+        border: 1px solid var(--hairline);
+        background: rgba(250, 248, 241, 0.54);
+      }
+
+      .survey-row {
+        display: grid;
+        grid-template-columns: 180px 1fr;
+        gap: 28px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid rgba(8, 8, 6, 0.11);
+      }
+
+      .survey-row:last-child {
+        padding-bottom: 0;
+        border-bottom: 0;
+      }
+
+      .survey-row strong {
+        font-size: clamp(22px, 1.6vw, 30px);
+        line-height: 1.1;
+        font-weight: 400;
+      }
+
+      .survey-row span {
+        font-size: clamp(17px, 1.12vw, 21px);
+        line-height: 1.44;
+        color: var(--mid-ink);
+      }
+
+      .questionnaire-slide {
+        grid-template-columns: minmax(420px, 0.78fr) minmax(700px, 1.22fr);
+        gap: clamp(40px, 5.5vw, 94px);
+        align-items: center;
+        padding: 8vh 7vw;
+      }
+
+      .questionnaire-copy {
+        max-width: 38em;
+      }
+
+      .questionnaire-copy .title-large {
+        font-size: clamp(58px, 6.9vw, 126px);
+      }
+
+      .questionnaire-points {
+        display: grid;
+        gap: 16px;
+        margin-top: 34px;
+      }
+
+      .questionnaire-point {
+        display: grid;
+        grid-template-columns: 44px 1fr;
+        gap: 18px;
+        padding-top: 16px;
+        border-top: 1px solid var(--hairline);
+      }
+
+      .questionnaire-point strong {
+        color: var(--soft-ink);
+        font-size: clamp(18px, 1.25vw, 24px);
+        line-height: 1;
+        font-style: italic;
+        font-weight: 400;
+      }
+
+      .questionnaire-point span {
+        font-size: clamp(17px, 1.12vw, 21px);
+        line-height: 1.42;
+        color: var(--mid-ink);
+      }
+
+      .questionnaire-gallery {
+        position: relative;
+        display: flex;
+        width: 100%;
+        min-height: min(73vh, 760px);
+        align-items: center;
+        padding: 26px 7vw 34px 34px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        overscroll-behavior-x: contain;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(8, 8, 6, 0.24) transparent;
+      }
+
+      .questionnaire-gallery::-webkit-scrollbar {
+        height: 8px;
+      }
+
+      .questionnaire-gallery::-webkit-scrollbar-track {
+        background: rgba(8, 8, 6, 0.06);
+      }
+
+      .questionnaire-gallery::-webkit-scrollbar-thumb {
+        background: rgba(8, 8, 6, 0.22);
+        border-radius: 99px;
+      }
+
+      .questionnaire-card {
+        position: relative;
+        flex: 0 0 clamp(300px, 27vw, 430px);
+        aspect-ratio: 0.78;
+        scroll-snap-align: center;
+        border: 1px solid rgba(8, 8, 6, 0.2);
+        background: #fff;
+        overflow: hidden;
+      }
+
+      .questionnaire-card + .questionnaire-card {
+        margin-left: clamp(-118px, -7vw, -74px);
+      }
+
+      .questionnaire-card:nth-child(1) {
+        z-index: 5;
+        transform: translateY(12px) rotate(-1.6deg);
+      }
+
+      .questionnaire-card:nth-child(2) {
+        z-index: 4;
+        transform: translateY(-12px) rotate(1.1deg);
+      }
+
+      .questionnaire-card:nth-child(3) {
+        z-index: 3;
+        transform: translateY(18px) rotate(-0.8deg);
+      }
+
+      .questionnaire-card:nth-child(4) {
+        z-index: 2;
+        transform: translateY(-8px) rotate(1.4deg);
+      }
+
+      .questionnaire-card:nth-child(5) {
+        z-index: 1;
+        transform: translateY(10px) rotate(-1deg);
+      }
+
+      .questionnaire-card img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+        background: #fff;
+      }
+
+      .space-intent {
+        grid-template-columns: minmax(420px, 0.85fr) minmax(720px, 1.15fr);
+        gap: clamp(42px, 5.5vw, 98px);
+        align-items: center;
+        padding: 8vh 7vw;
+      }
+
+      .intent-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .intent-slot {
+        position: relative;
+        display: flex;
+        min-height: 250px;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--hairline);
+        color: rgba(8, 8, 6, 0.54);
+        font-size: clamp(18px, 1.25vw, 24px);
+        font-style: italic;
+        overflow: hidden;
+      }
+
+      .intent-slot.wide {
+        grid-column: span 2;
+        min-height: 220px;
+      }
+
+      .intent-slot::before {
+        content: "";
+        position: absolute;
+        inset: 14px;
+        border: 1px solid rgba(8, 8, 6, 0.08);
+      }
+
+      .mood {
+        align-items: stretch;
+        grid-template-rows: auto 1fr;
+        gap: 38px;
+        padding: 9vh 7vw 9vh;
+      }
+
+      .mood-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 48px;
+        align-items: end;
+      }
+
+      .mood-head h1 {
+        margin: 0;
+        max-width: 9em;
+        font-size: clamp(58px, 7vw, 124px);
+        line-height: 0.94;
+        font-weight: 400;
+      }
+
+      .mood-head p {
+        width: min(27em, 38vw);
+        margin: 0 0 10px;
+        font-size: clamp(20px, 1.55vw, 28px);
+        line-height: 1.35;
+        color: var(--soft-ink);
+      }
+
+      .mood-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr 1fr;
+        gap: 24px;
+        min-height: 0;
+      }
+
+      .mood-slot {
+        position: relative;
+        display: flex;
+        min-height: 0;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--hairline);
+        color: rgba(8, 8, 6, 0.55);
+        font-size: clamp(17px, 1.25vw, 23px);
+        font-style: italic;
+        overflow: hidden;
+      }
+
+      .mood-slot::before {
+        content: "";
+        position: absolute;
+        inset: 14px;
+        border: 1px solid rgba(8, 8, 6, 0.08);
+      }
+
+      .mood-slot.tall {
+        grid-row: span 2;
+      }
+
+      .mood-column {
+        display: grid;
+        gap: 24px;
+      }
+
+      .gallery-slide {
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr);
+        gap: clamp(34px, 4.8vw, 72px);
+        padding: 8vh 7vw calc(10vh + 74px);
+      }
+
+      .gallery-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 48px;
+        align-items: end;
+      }
+
+      .gallery-head h1 {
+        margin: 0;
+        max-width: 9em;
+        font-size: clamp(58px, 7vw, 124px);
+        line-height: 0.94;
+        font-weight: 400;
+      }
+
+      .reference-gallery {
+        position: relative;
+        display: flex;
+        width: 100%;
+        min-height: min(64vh, 680px);
+        align-items: center;
+        padding: 34px 16vw 42px 32px;
+        overflow-x: auto;
+        overflow-y: visible;
+        overscroll-behavior-x: contain;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(8, 8, 6, 0.22) transparent;
+      }
+
+      .reference-gallery::-webkit-scrollbar {
+        height: 8px;
+      }
+
+      .reference-gallery::-webkit-scrollbar-track {
+        background: rgba(8, 8, 6, 0.05);
+      }
+
+      .reference-gallery::-webkit-scrollbar-thumb {
+        background: rgba(8, 8, 6, 0.2);
+        border-radius: 99px;
+      }
+
+      .gallery-card {
+        appearance: none;
+        -webkit-appearance: none;
+        border: 0;
+        padding: 0;
+        font: inherit;
+        color: inherit;
+        cursor: zoom-in;
+      }
+
+      .reference-card {
+        position: relative;
+        flex: 0 0 clamp(280px, 23vw, 430px);
+        aspect-ratio: 4 / 5;
+        scroll-snap-align: center;
+        border: 1px solid rgba(8, 8, 6, 0.2);
+        background: #f6f1e8;
+        overflow: hidden;
+        transform-origin: 50% 80%;
+      }
+
+      .reference-card + .reference-card {
+        margin-left: clamp(-132px, -8.2vw, -76px);
+      }
+
+      .reference-card:nth-child(6n + 1) {
+        z-index: 6;
+        transform: translateY(16px) rotate(-1.8deg);
+      }
+
+      .reference-card:nth-child(6n + 2) {
+        z-index: 5;
+        transform: translateY(-14px) rotate(1.2deg);
+      }
+
+      .reference-card:nth-child(6n + 3) {
+        z-index: 4;
+        transform: translateY(22px) rotate(-0.9deg);
+      }
+
+      .reference-card:nth-child(6n + 4) {
+        z-index: 3;
+        transform: translateY(-8px) rotate(1.7deg);
+      }
+
+      .reference-card:nth-child(6n + 5) {
+        z-index: 2;
+        transform: translateY(12px) rotate(-1.1deg);
+      }
+
+      .reference-card:nth-child(6n + 6) {
+        z-index: 1;
+        transform: translateY(-18px) rotate(0.8deg);
+      }
+
+      .reference-card img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .reference-card span {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        display: grid;
+        min-width: 38px;
+        height: 28px;
+        place-items: center;
+        border: 1px solid rgba(8, 8, 6, 0.22);
+        background: rgba(250, 248, 241, 0.76);
+        font-family: var(--sans);
+        font-size: 11px;
+        line-height: 1;
+        color: rgba(8, 8, 6, 0.64);
+      }
+
+      .material-reference-card {
+        flex-basis: clamp(310px, 25vw, 460px);
+        aspect-ratio: 3 / 4;
+        background: #fbf8f1;
+      }
+
+      .material-reference-card strong {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 2;
+        display: flex;
+        min-height: 74px;
+        align-items: center;
+        padding: 18px 22px 15px;
+        border-bottom: 1px solid rgba(8, 8, 6, 0.1);
+        background: rgba(250, 248, 241, 0.9);
+        font-family: var(--serif);
+        font-size: clamp(18px, 1.35vw, 26px);
+        font-weight: 400;
+        line-height: 1.16;
+        text-align: left;
+      }
+
+      .material-reference-card img {
+        position: absolute;
+        top: 74px;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: calc(100% - 74px);
+        object-fit: contain;
+        background: #fbf8f1;
+      }
+
+      .material-reference-card span {
+        top: 86px;
+      }
+
+      .intent-carousel {
+        display: grid;
+        min-height: min(64vh, 680px);
+        grid-template-columns: minmax(0, 1fr) minmax(168px, 0.26fr);
+        gap: clamp(22px, 4vw, 64px);
+        align-items: stretch;
+      }
+
+      .intent-stage {
+        position: relative;
+        display: block;
+        min-width: 0;
+        min-height: min(58vh, 620px);
+        aspect-ratio: 16 / 10;
+        border: 1px solid rgba(8, 8, 6, 0.2);
+        background: #0b0906;
+        overflow: hidden;
+      }
+
+      .intent-stage img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        background: #0b0906;
+      }
+
+      .intent-stage::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 38%;
+        background: linear-gradient(to top, rgba(8, 8, 6, 0.56), rgba(8, 8, 6, 0));
+        pointer-events: none;
+      }
+
+      .intent-stage-label,
+      .intent-stage-count {
+        position: absolute;
+        z-index: 2;
+        font-family: var(--sans);
+        color: rgba(250, 248, 241, 0.88);
+      }
+
+      .intent-stage-label {
+        left: 24px;
+        bottom: 24px;
+        font-size: clamp(14px, 1.15vw, 18px);
+        letter-spacing: 0.02em;
+      }
+
+      .intent-stage-count {
+        right: 24px;
+        bottom: 24px;
+        font-size: 12px;
+        color: rgba(250, 248, 241, 0.66);
+      }
+
+      .intent-side {
+        display: grid;
+        min-height: 0;
+        grid-template-rows: auto minmax(0, 1fr);
+        gap: 16px;
+      }
+
+      .intent-actions {
+        display: grid;
+        grid-template-columns: 42px minmax(0, 1fr) 42px;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .intent-action {
+        display: grid;
+        width: 42px;
+        height: 42px;
+        place-items: center;
+        border: 1px solid rgba(8, 8, 6, 0.16);
+        background: rgba(250, 248, 241, 0.72);
+        color: var(--ink);
+        cursor: pointer;
+      }
+
+      .intent-action svg {
+        width: 18px;
+        height: 18px;
+        fill: none;
+        stroke: currentColor;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.4;
+      }
+
+      .intent-progress {
+        font-family: var(--sans);
+        font-size: 12px;
+        line-height: 1;
+        text-align: center;
+        color: rgba(8, 8, 6, 0.48);
+      }
+
+      .intent-rail {
+        display: grid;
+        min-height: 0;
+        gap: 10px;
+        padding: 2px 8px 2px 0;
+        overflow: auto;
+        overscroll-behavior: contain;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(8, 8, 6, 0.2) transparent;
+      }
+
+      .intent-rail::-webkit-scrollbar {
+        width: 7px;
+        height: 7px;
+      }
+
+      .intent-rail::-webkit-scrollbar-thumb {
+        background: rgba(8, 8, 6, 0.18);
+        border-radius: 999px;
+      }
+
+      .intent-thumb {
+        position: relative;
+        aspect-ratio: 4 / 5;
+        border: 1px solid rgba(8, 8, 6, 0.08);
+        background: #f6f1e8;
+        opacity: 0.5;
+        overflow: hidden;
+        transition: opacity 0.24s ease, border-color 0.24s ease, transform 0.24s ease;
+      }
+
+      .intent-thumb.is-active {
+        border-color: rgba(8, 8, 6, 0.42);
+        opacity: 1;
+        transform: translateX(-7px);
+      }
+
+      .intent-thumb img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        background: #f6f1e8;
+      }
+
+      .intent-thumb span {
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        display: grid;
+        min-width: 32px;
+        height: 24px;
+        place-items: center;
+        border: 1px solid rgba(8, 8, 6, 0.18);
+        background: rgba(250, 248, 241, 0.76);
+        font-family: var(--sans);
+        font-size: 10px;
+        line-height: 1;
+        color: rgba(8, 8, 6, 0.64);
+      }
+
+      .gallery-card:focus-visible,
+      .intent-action:focus-visible,
+      .lightbox button:focus-visible {
+        outline: 1px solid rgba(8, 8, 6, 0.62);
+        outline-offset: 4px;
+      }
+
+      .lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 80;
+        display: grid;
+        grid-template-columns: 76px minmax(0, 1fr) 76px;
+        grid-template-rows: 74px minmax(0, 1fr) 60px;
+        gap: 0;
+        padding: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right))
+          max(16px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+        background: rgba(250, 248, 241, 0.96);
+        color: var(--ink);
+        opacity: 1;
+      }
+
+      .lightbox[hidden] {
+        display: none;
+      }
+
+      .lightbox-close {
+        grid-column: 3;
+        justify-self: end;
+      }
+
+      .lightbox-figure {
+        grid-column: 2;
+        grid-row: 2;
+        display: grid;
+        min-width: 0;
+        min-height: 0;
+        place-items: safe center;
+        margin: 0;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .lightbox-image {
+        display: block;
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        background: #fff;
+      }
+
+      .lightbox-caption {
+        grid-column: 2;
+        grid-row: 3;
+        align-self: center;
+        justify-self: center;
+        font-family: var(--sans);
+        font-size: 12px;
+        line-height: 1;
+        color: rgba(8, 8, 6, 0.48);
+      }
+
+      .lightbox-count {
+        margin-left: 12px;
+      }
+
+      .lightbox-button,
+      .lightbox-close {
+        display: grid;
+        width: 42px;
+        height: 42px;
+        place-items: center;
+        border: 1px solid rgba(8, 8, 6, 0.22);
+        border-radius: 50%;
+        background: rgba(250, 248, 241, 0.8);
+        color: var(--ink);
+        cursor: pointer;
+      }
+
+      .lightbox-prev {
+        grid-column: 1;
+        grid-row: 2;
+        align-self: center;
+        justify-self: center;
+      }
+
+      .lightbox-next {
+        grid-column: 3;
+        grid-row: 2;
+        align-self: center;
+        justify-self: center;
+      }
+
+      .lightbox-button svg,
+      .lightbox-close svg {
+        width: 18px;
+        height: 18px;
+        stroke: currentColor;
+        stroke-width: 1.5;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .closing {
+        place-items: center;
+        text-align: center;
+      }
+
+      .closing h1 {
+        margin: 0;
+        max-width: 10em;
+        font-size: clamp(62px, 7.2vw, 132px);
+        line-height: 0.96;
+        font-weight: 400;
+      }
+
+      .closing p {
+        width: min(34em, 78vw);
+        margin: 30px auto 0;
+        font-size: clamp(21px, 1.7vw, 31px);
+        line-height: 1.34;
+        color: var(--soft-ink);
+      }
+
+      .controls {
+        position: fixed;
+        z-index: 20;
+        right: max(26px, env(safe-area-inset-right));
+        bottom: max(24px, env(safe-area-inset-bottom));
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-family: var(--sans);
+      }
+
+      .nav-button {
+        display: grid;
+        width: 38px;
+        height: 38px;
+        place-items: center;
+        border: 1px solid rgba(8, 8, 6, 0.22);
+        border-radius: 50%;
+        background: rgba(250, 248, 241, 0.68);
+        color: var(--ink);
+        cursor: pointer;
+      }
+
+      .nav-button:disabled {
+        opacity: 0.25;
+        cursor: default;
+      }
+
+      .nav-button svg {
+        width: 18px;
+        height: 18px;
+        stroke: currentColor;
+        stroke-width: 1.5;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .counter {
+        min-width: 42px;
+        font-size: 12px;
+        line-height: 1;
+        color: rgba(8, 8, 6, 0.46);
+        text-align: center;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .hint {
+        position: fixed;
+        z-index: 20;
+        left: max(34px, env(safe-area-inset-left));
+        bottom: max(25px, env(safe-area-inset-bottom));
+        font-family: var(--sans);
+        font-size: 12px;
+        color: rgba(8, 8, 6, 0.34);
+      }
+
+      @media (hover: hover) {
+        .nav-button:hover:not(:disabled) {
+          background: rgba(8, 8, 6, 0.06);
+        }
+      }
+
+      @media (max-width: 1180px) and (min-width: 761px) {
+        .map-slide {
+          grid-template-columns: minmax(0, 0.95fr) minmax(430px, 1.05fr);
+          gap: 34px;
+          padding-inline: 5vw;
+        }
+
+        .map-copy .title-large {
+          font-size: clamp(50px, 6.2vw, 78px);
+        }
+
+        .map-copy .note {
+          font-size: clamp(15px, 1.5vw, 18px);
+          line-height: 1.45;
+        }
+
+        .map-canvas {
+          min-height: 540px;
+        }
+
+        .map-ring {
+          inset: 58px 58px 72px;
+        }
+
+        .map-node {
+          width: clamp(128px, 13vw, 150px);
+          min-height: clamp(128px, 13vw, 150px);
+          padding: 14px;
+        }
+
+        .map-node.center {
+          width: clamp(154px, 15vw, 178px);
+          min-height: clamp(154px, 15vw, 178px);
+        }
+
+        .map-node strong {
+          font-size: clamp(18px, 2vw, 24px);
+        }
+
+        .map-node span {
+          font-size: 12px;
+          line-height: 1.2;
+        }
+      }
+
+      @media (max-width: 760px) {
+        html,
+        body,
+        .deck {
+          max-width: 100vw;
+        }
+
+        .slide {
+          padding: max(64px, calc(env(safe-area-inset-top) + 50px)) 8vw
+            calc(98px + env(safe-area-inset-bottom));
+          touch-action: pan-y;
+        }
+
+        .slide h1,
+        .slide h2,
+        .slide p,
+        .slide strong,
+        .slide span {
+          max-width: 100%;
+          overflow-wrap: break-word;
+        }
+
+        .top-meta {
+          top: max(18px, env(safe-area-inset-top));
+          left: max(18px, env(safe-area-inset-left));
+          right: max(18px, env(safe-area-inset-right));
+          justify-content: space-between;
+          font-size: 12px;
+        }
+
+        .brand-signature {
+          top: max(42px, calc(env(safe-area-inset-top) + 42px));
+          left: max(18px, env(safe-area-inset-left));
+          font-size: 13px;
+        }
+
+        .wordmark-wrap {
+          max-width: 88vw;
+          min-width: 0;
+          font-size: clamp(46px, 14.2vw, 60px);
+        }
+
+        .cover-copy {
+          bottom: 18vh;
+          width: min(84vw, 360px);
+        }
+
+        .cover-title {
+          width: min(100%, 76vw);
+          margin-inline: auto;
+          font-size: clamp(20px, 5.2vw, 24px);
+          line-height: 1.24;
+        }
+
+        .cover-title span {
+          display: block;
+        }
+
+        .cover-subtitle {
+          margin-top: 12px;
+          font-size: clamp(14px, 3.8vw, 16px);
+          line-height: 1.42;
+        }
+
+        .cover-footer {
+          display: none;
+        }
+
+        .slot-garden {
+          width: 28vw;
+          left: 5vw;
+          top: 18vh;
+        }
+
+        .slot-material {
+          width: 28vw;
+          right: 5vw;
+          top: 18vh;
+        }
+
+        .slot-furniture {
+          width: 54vw;
+          right: 23vw;
+          bottom: 8vh;
+        }
+
+        .story,
+        .principles {
+          grid-template-columns: 1fr;
+          gap: 34px;
+          align-content: start;
+        }
+
+        .title-large {
+          font-size: clamp(34px, 9.2vw, 42px);
+          line-height: 1.08;
+        }
+
+        .note {
+          width: min(21em, 74vw);
+          margin-top: 22px;
+          font-size: clamp(19px, 5vw, 25px);
+        }
+
+        .item {
+          grid-template-columns: 40px 1fr;
+          gap: 16px;
+        }
+
+        .item h2 {
+          font-size: clamp(23px, 6vw, 32px);
+        }
+
+        .item p {
+          font-size: clamp(15px, 4vw, 19px);
+          line-height: 1.42;
+        }
+
+        .mood-head {
+          display: block;
+        }
+
+        .mood-head p {
+          width: 100%;
+          margin-top: 22px;
+        }
+
+        .mood-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .mood-slot {
+          min-height: 19vh;
+        }
+
+        .brief-grid,
+        .material-board,
+        .route,
+        .feature-strip,
+        .questions,
+        .intent-grid,
+        .space-intent,
+        .questionnaire-slide,
+        .map-slide {
+          grid-template-columns: 1fr;
+          gap: 14px;
+        }
+
+        .metric,
+        .material-card,
+        .route-step {
+          min-height: 0;
+          padding: 18px 0;
+          border-right: 0;
+          border-bottom: 0;
+          border-left: 0;
+        }
+
+        .route-step span {
+          margin-bottom: 16px;
+        }
+
+        .map-canvas {
+          min-height: 520px;
+        }
+
+        .map-ring,
+        .map-line {
+          display: none;
+        }
+
+        .map-node {
+          position: relative;
+          inset: auto;
+          width: 100%;
+          min-height: 0;
+          margin-bottom: 12px;
+          border-radius: 0;
+        }
+
+        .map-node.center {
+          left: auto;
+          top: auto;
+          width: 100%;
+          min-height: 0;
+          transform: none;
+        }
+
+        .question-slide {
+          grid-template-columns: 1fr;
+          grid-template-rows: auto 1fr;
+          gap: 18px;
+          align-items: start;
+        }
+
+        .question-mark {
+          font-size: 48px;
+          line-height: 1;
+          opacity: 0.12;
+          justify-self: start;
+        }
+
+        .feature,
+        .question-item {
+          min-height: 0;
+          padding: 16px 0;
+          border-left: 0;
+        }
+
+        .feature-detail-head,
+        .feature-detail {
+          grid-template-columns: 1fr;
+          gap: 18px;
+        }
+
+        .feature-detail-slide {
+          padding: max(72px, calc(env(safe-area-inset-top) + 56px)) 8vw
+            calc(128px + env(safe-area-inset-bottom));
+        }
+
+        .top-meta {
+          font-family: var(--sans);
+        }
+
+        .top-meta span:last-child {
+          display: none;
+        }
+
+        .feature-detail-head h1 {
+          max-width: 100%;
+          font-size: clamp(34px, 9vw, 42px);
+          line-height: 1.12;
+          word-break: keep-all;
+        }
+
+        .feature-detail-head p {
+          width: min(100%, 76vw);
+          font-size: clamp(16px, 4vw, 19px);
+          line-height: 1.46;
+          overflow-wrap: break-word;
+        }
+
+        .feature-detail-list {
+          gap: 42px;
+          margin-top: 36px;
+        }
+
+        .feature-detail {
+          padding-top: 28px;
+        }
+
+        .feature-symbol {
+          font-size: clamp(54px, 17vw, 82px);
+          line-height: 0.9;
+        }
+
+        .feature-body {
+          width: min(100%, 76vw);
+          min-width: 0;
+        }
+
+        .feature-body h2 {
+          font-size: clamp(24px, 6.6vw, 31px);
+          line-height: 1.2;
+          overflow-wrap: anywhere;
+          overflow-wrap: break-word;
+        }
+
+        .feature-body p {
+          width: 100%;
+          font-size: clamp(15px, 4vw, 17px);
+          line-height: 1.62;
+          overflow-wrap: break-word;
+        }
+
+        .feature-body blockquote {
+          width: 100%;
+          padding-left: 16px;
+          font-size: clamp(17px, 4.5vw, 21px);
+          line-height: 1.42;
+          overflow-wrap: break-word;
+        }
+
+        .transfer {
+          width: 100%;
+        }
+
+        .transfer h3 {
+          font-size: clamp(16px, 4.2vw, 18px);
+        }
+
+        .transfer-tags span {
+          font-size: 14px;
+        }
+
+        .survey-sheet {
+          padding: 22px;
+        }
+
+        .survey-row {
+          grid-template-columns: 1fr;
+          gap: 8px;
+        }
+
+        .questionnaire-slide {
+          grid-template-columns: 1fr;
+          grid-template-rows: auto 1fr;
+          gap: 24px;
+          align-items: start;
+        }
+
+        .questionnaire-gallery {
+          min-height: 38vh;
+          max-height: 42vh;
+          padding: 16px 28vw 24px 12px;
+        }
+
+        .questionnaire-copy {
+          max-width: 100%;
+          padding-right: 0;
+        }
+
+        .questionnaire-copy .title-large {
+          font-size: clamp(34px, 9.2vw, 42px);
+        }
+
+        .questionnaire-point {
+          grid-template-columns: 34px minmax(0, 1fr);
+          gap: 12px;
+        }
+
+        .questionnaire-point span {
+          font-size: clamp(15px, 3.9vw, 17px);
+          line-height: 1.5;
+          overflow-wrap: break-word;
+        }
+
+        .questionnaire-card {
+          flex-basis: min(76vw, 360px);
+        }
+
+        .questionnaire-card + .questionnaire-card {
+          margin-left: -58px;
+        }
+
+        .gallery-slide {
+          display: block;
+          padding: max(72px, calc(env(safe-area-inset-top) + 56px)) 8vw
+            calc(128px + env(safe-area-inset-bottom));
+        }
+
+        .gallery-head {
+          display: block;
+        }
+
+        .gallery-head h1 {
+          font-size: clamp(34px, 9.2vw, 42px);
+          line-height: 1.08;
+        }
+
+        .reference-gallery {
+          min-height: min(62vh, 560px);
+          margin-top: 34px;
+          padding: 24px 28vw 34px 18px;
+        }
+
+        .reference-card {
+          flex-basis: min(76vw, 360px);
+        }
+
+        .material-reference-card {
+          flex-basis: min(78vw, 368px);
+        }
+
+        .material-reference-card strong {
+          min-height: 64px;
+          padding: 15px 16px 13px;
+          font-size: 18px;
+        }
+
+        .material-reference-card img {
+          top: 64px;
+          height: calc(100% - 64px);
+        }
+
+        .material-reference-card span {
+          top: 74px;
+        }
+
+        .reference-card + .reference-card {
+          margin-left: -64px;
+        }
+
+        .reference-card span {
+          min-width: 34px;
+          height: 26px;
+          font-size: 10px;
+        }
+
+        .intent-carousel {
+          display: block;
+          min-height: 0;
+          margin-top: 30px;
+        }
+
+        .intent-stage {
+          height: min(43vh, 365px);
+          min-height: 0;
+          aspect-ratio: auto;
+        }
+
+        .intent-stage-label {
+          left: 16px;
+          bottom: 18px;
+          max-width: calc(100% - 92px);
+          font-size: 13px;
+          text-align: left;
+        }
+
+        .intent-stage-count {
+          right: 16px;
+          bottom: 18px;
+        }
+
+        .intent-side {
+          margin-top: 15px;
+          gap: 12px;
+        }
+
+        .intent-actions {
+          grid-template-columns: 40px minmax(0, 1fr) 40px;
+        }
+
+        .intent-action {
+          width: 40px;
+          height: 40px;
+        }
+
+        .intent-rail {
+          display: flex;
+          gap: 9px;
+          padding: 4px 0 42px;
+          overflow-x: auto;
+          overflow-y: hidden;
+        }
+
+        .intent-thumb {
+          flex: 0 0 74px;
+          width: 74px;
+        }
+
+        .intent-thumb.is-active {
+          transform: translateY(-4px);
+        }
+
+        .lightbox {
+          grid-template-columns: 56px minmax(0, 1fr) 56px;
+          grid-template-rows: 62px minmax(0, 1fr) 58px;
+          padding: max(10px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right))
+            max(10px, env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left));
+        }
+
+        .lightbox-button,
+        .lightbox-close {
+          width: 40px;
+          height: 40px;
+        }
+
+        .intent-slot,
+        .intent-slot.wide {
+          grid-column: auto;
+          min-height: 19vh;
+        }
+
+        .controls {
+          right: auto;
+          left: 50%;
+          bottom: max(14px, calc(env(safe-area-inset-bottom) + 14px));
+          gap: 6px;
+          padding: 5px;
+          border: 1px solid rgba(8, 8, 6, 0.14);
+          border-radius: 999px;
+          background: rgba(250, 248, 241, 0.86);
+          box-shadow: 0 8px 28px rgba(55, 39, 22, 0.08);
+          transform: translateX(-50%);
+          -webkit-backdrop-filter: blur(16px);
+          backdrop-filter: blur(16px);
+        }
+
+        .nav-button {
+          width: 42px;
+          height: 42px;
+          border: 0;
+          background: transparent;
+        }
+
+        .counter {
+          min-width: 50px;
+          font-size: 12px;
+        }
+
+        .hint {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="deck" aria-live="polite">
+      <div class="plaster-grain" aria-hidden="true"></div>
+      <div class="top-meta" aria-hidden="true">
+        <span id="meta-index">01</span>
+        <span id="meta-label">Design Demo</span>
+      </div>
+
+      <section class="slide cover is-active" data-label="Design Demo">
+        <div class="brand-signature" aria-label="上海张小野空间设计">上海张小野空间设计</div>
+        <div class="wordmark-wrap" aria-label="Toscana,">
+          <span class="wordmark" aria-hidden="true"></span>
+          <span class="comma-shell" aria-hidden="true">
+            <svg class="comma-svg" viewBox="0 0 64 90">
+              <path class="comma-mark" d="M38 18 C21 34 20 55 33 64 C39 68 43 65 39 58 C35 51 27 52 24 60" />
+            </svg>
+          </span>
+        </div>
+        <div class="cover-copy" data-animate>
+          <h1 class="cover-title"><span>海外800㎡别墅</span><span>客户方案汇报</span></h1>
+          <p class="cover-subtitle">从托斯卡纳风格本身开始：历史、地域、建筑关系、材料与个人定制</p>
+        </div>
+        <div class="ambient-hairline" aria-hidden="true"></div>
+        <div class="cover-footer" aria-hidden="true">
+          <span>Tuscan Natural Luxury</span>
+          <span>Scene · Material · Furniture · Service Logic</span>
+        </div>
+      </section>
+
+      <section class="slide map-slide" data-label="Renaissance Map">
+        <div class="map-copy">
+          <p class="kicker" data-animate>01 · Renaissance Evolution</p>
+          <h1 class="title-large" data-animate>从中世纪到文艺复兴</h1>
+          <p class="note" data-animate>
+            这一页先不直接讲托斯卡纳，而是建立它背后的历史来源：欧洲空间审美从中世纪的神性秩序，进入文艺复兴后，开始重新发现“人、比例、光线与自然”。
+            <br /><br />
+            中世纪建筑更强调信仰与崇高感，空间常以高耸、厚重、神圣的方式，让人感受到宗教秩序的力量。进入14—16世纪的意大利文艺复兴后，审美中心开始转向“人”。佛罗伦萨成为重要现场，艺术家与建筑师重新研究古罗马建筑中的比例、圆拱、柱式与几何秩序。1420年布鲁内莱斯基开始建造佛罗伦萨大教堂穹顶，并于1436年完成，它象征着空间开始被结构、数学与人的尺度共同组织。
+            <br /><br />
+            从这里开始，文艺复兴审美分化到绘画、建筑、室内与生活艺术之中。绘画里出现透视与真实空间；建筑里出现清晰的比例、轴线、圆拱与穹顶；室内里，家具、织物、器物和墙面共同参与身份与生活秩序的表达。
+          </p>
+          <div class="quote" data-animate>
+            <strong>先把文艺复兴的空间逻辑讲清楚，下一页再落到托斯卡纳为什么会形成这种生活美学。</strong>
+          </div>
+        </div>
+        <div class="map-canvas" data-animate>
+          <div class="map-ring" aria-hidden="true"></div>
+          <div class="map-line line-1" aria-hidden="true"></div>
+          <div class="map-line line-2" aria-hidden="true"></div>
+          <div class="map-line line-3" aria-hidden="true"></div>
+          <div class="map-line line-4" aria-hidden="true"></div>
+          <div class="map-node before"><strong>中世纪</strong><span>信仰、崇高、厚重<br />空间服务宗教秩序</span></div>
+          <div class="map-node center"><strong>文艺复兴</strong><span>14—16世纪意大利<br />从神性转向人、比例、光线与自然</span></div>
+          <div class="map-node art"><strong>绘画</strong><span>透视法建立深度<br />画面开始拥有真实空间</span></div>
+          <div class="map-node arch"><strong>建筑</strong><span>圆拱、穹顶、柱式<br />对称、轴线与几何秩序</span></div>
+          <div class="map-node toscana"><strong>托斯卡纳</strong><span>作为下一页展开的地域风格分支</span></div>
+        </div>
+      </section>
+
+      <section class="slide principles" data-label="What Is Toscana">
+        <div>
+          <p class="kicker" data-animate>02 · Origin of Tuscan Style</p>
+          <h1 class="title-large" data-animate>托斯卡纳风格完整由来</h1>
+          <p class="note" data-animate>
+            承接上一页的文艺复兴脉络，托斯卡纳才正式展开。它是意大利中部大区，背靠亚平宁山脉、坐拥丘陵田园，历史上先后受伊特鲁里亚文明、古罗马、中世纪城邦、文艺复兴多重文化浸润，风格是当地千年生活方式的沉淀。
+          </p>
+          <div class="rule" data-animate aria-hidden="true"></div>
+        </div>
+        <div class="stack compact">
+          <article class="item compact" data-animate>
+            <div class="num">01</div>
+            <div>
+              <h2>本源基底（古代）</h2>
+              <p>伊特鲁里亚人擅长石材、夯土、陶土工艺，就地取材建造居所，粗石墙面、赤陶构件、拱形结构成为最早特征；罗马时期引入拱券、廊柱，强化建筑轮廓。</p>
+            </div>
+          </article>
+          <article class="item compact" data-animate>
+            <div class="num">02</div>
+            <div>
+              <h2>乡村生活演化（中世纪-近代）</h2>
+              <p>当地多山地丘陵，民居依山而建，为适配日照、气候与农耕需求，诞生厚墙、小窗、坡屋顶、户外庭院的形态；物资有限，主打原生材料，拒绝精致雕琢，形成质朴粗粝的质感。</p>
+            </div>
+          </article>
+          <article class="item compact" data-animate>
+            <div class="num">03</div>
+            <div>
+              <h2>风格定型与传播</h2>
+              <p>文艺复兴让托斯卡纳的建筑美学闻名欧洲，近代欧美将这种田园闲适、自然复古的乡村风格提炼、简化，演变为如今全球流行的托斯卡纳田园风，区别于正统欧式宫廷的华丽繁复。</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="slide feature-detail-slide" data-label="Space Features">
+        <div class="feature-detail-head" data-animate>
+          <h1><span>托斯卡纳</span><span>空间特征</span></h1>
+        </div>
+        <div class="feature-detail-list">
+          <article class="feature-detail" data-animate>
+            <div class="feature-symbol">墙</div>
+            <div class="feature-body">
+              <h2>墙｜时间沉积出来的厚度</h2>
+              <p>在托斯卡纳丘陵地区，石材是最容易获得的建筑资源。两千多年前，伊特鲁里亚人便开始利用当地石灰岩、砂岩和夯土建造房屋。由于缺乏现代保温技术，墙体往往厚达50-80厘米，用来抵御冬季寒冷与夏季烈日。</p>
+              <p>因此，墙面从来不是平整光滑的。灰泥、粗石、手工抹灰留下的痕迹，被当地人视为岁月的印记。直到今天，在托斯卡纳许多百年酒庄和农庄中，墙面依然保留着不规则的裂纹与颗粒感。</p>
+              <blockquote>真正的美，不是完美无瑕，而是时间留下的痕迹。</blockquote>
+              <div class="transfer">
+                <h3>设计转译</h3>
+                <div class="transfer-tags">
+                  <span>石灰基灰泥</span><span>粗颗粒艺术漆</span><span>天然石材</span><span>手工抹灰肌理</span><span>历史感</span><span>厚重感</span><span>温度感</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="feature-detail" data-animate>
+            <div class="feature-symbol">顶</div>
+            <div class="feature-body">
+              <h2>顶｜建筑感比装饰更重要</h2>
+              <p>托斯卡纳人对“顶”的理解，本质上是建筑结构。由于木材资源丰富，中世纪农庄普遍采用实木梁架结构，许多庄园至今保留着数百年前的栗木梁与橡木梁。</p>
+              <p>古罗马时期遗留下来的拱券技术，也成为托斯卡纳建筑的重要特征。拱门、拱廊、穹顶不仅是美学符号，更是建筑智慧。人们常在挑高木梁下享用晚餐，空间本身像一座微型建筑，而非被家具填满的盒子。</p>
+              <div class="transfer">
+                <h3>设计转译</h3>
+                <div class="transfer-tags">
+                  <span>木梁结构</span><span>拱形门洞</span><span>圆拱过道</span><span>坡屋顶轮廓</span><span>建筑骨骼感</span><span>仪式感</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="feature-detail" data-animate>
+            <div class="feature-symbol">地</div>
+            <div class="feature-body">
+              <h2>地｜土地的颜色永远最高级</h2>
+              <p>托斯卡纳最著名的景观之一，是夕阳下连绵起伏的赤色丘陵。当地人将脚下的黏土烧制成砖，铺设在庄园、教堂和酒窖中。这种被称为 Terracotta（赤陶砖）的材料，已有两千多年历史。</p>
+              <p>许多中世纪古堡里的地砖被磨损得发亮，却依然坚固。在当地人看来，真正高级的材料不是新的，而是越使用越有味道。因此托斯卡纳地面很少追求镜面反射，更多的是自然磨损后的温润质感。</p>
+              <div class="transfer">
+                <h3>设计转译</h3>
+                <div class="transfer-tags">
+                  <span>赤陶砖</span><span>古堡砖</span><span>手工复古砖</span><span>天然石材</span><span>老木地板</span><span>原生感</span><span>耐久性</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="feature-detail" data-animate>
+            <div class="feature-symbol">色</div>
+            <div class="feature-body">
+              <h2>色彩｜来自阳光与土地的调色板</h2>
+              <p>托斯卡纳一年拥有超过250天以上的日照。阳光照射在葡萄园、橄榄树和丘陵土地上，形成独特的大地色谱。这里几乎看不到冷白色，建筑外墙常采用米白色、奶油色、土黄色、赭石色、橄榄绿和深木棕。</p>
+              <p>这些颜色并非流行趋势，而是自然环境的映射，就像文艺复兴大师们绘画中的色调一样，温暖而克制。</p>
+              <div class="transfer">
+                <h3>设计转译</h3>
+                <div class="transfer-tags">
+                  <span>土地色</span><span>阳光色</span><span>木色</span><span>避免冷白</span><span>避免高饱和色</span><span>避免过强金属感</span><span>温暖包裹感</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="feature-detail" data-animate>
+            <div class="feature-symbol">境</div>
+            <div class="feature-body">
+              <h2>空间感｜从容，是托斯卡纳最珍贵的奢侈品</h2>
+              <p>很多人误以为托斯卡纳是一种乡村风格。实际上，它更像一种生活哲学。在托斯卡纳，人们习惯在葡萄园间散步，在橄榄树下喝酒，在石墙旁晒太阳。空间并不追求视觉刺激，而是强调人与自然的关系。</p>
+              <p>电影《托斯卡纳艳阳下》（Under the Tuscan Sun）讲述的正是一个美国女性搬进托斯卡纳老宅后，重新寻找生活节奏的故事。电影里最打动人的并非豪华装修，而是斑驳石墙、阳光庭院、木梁天花和时间流动的痕迹。</p>
+              <blockquote>这正是托斯卡纳空间的核心：温暖、从容，并且经得起时间。</blockquote>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="slide gallery-slide" data-label="Material Board">
+        <div class="gallery-head" data-animate>
+          <div>
+            <p class="kicker">04 · Material Board</p>
+            <h1>托斯卡纳常用材质板</h1>
+          </div>
+        </div>
+        <div class="reference-gallery" data-reference-gallery="material" data-reference-title="材质参考" data-animate aria-label="托斯卡纳材质参考图集"></div>
+      </section>
+
+      <section class="slide question-slide" data-label="House Basic Info">
+        <div class="question-mark" data-animate>?</div>
+        <div>
+          <p class="kicker" data-animate>05 · House Basic Info</p>
+          <h1 class="title-large" data-animate>业主家房子基本信息</h1>
+          <div class="questions" data-animate>
+            <div class="question-item">当地气候、日照和光照角度如何？</div>
+            <div class="question-item">窗户大小、采光条件、进光率如何？</div>
+            <div class="question-item">墙面、地面材质是否受当地光照和气候影响？</div>
+            <div class="question-item">外立面、建筑结构和室内风格如何统一？</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide questionnaire-slide" data-label="Questionnaire">
+        <div class="questionnaire-copy">
+          <p class="kicker" data-animate>06 · Client Questionnaire</p>
+          <h1 class="title-large" data-animate>客户需求问卷展示</h1>
+          <p class="note" data-animate>
+            方案不是我们单方面想象出来的。正式设计前，我们会系统了解生活习惯、家庭结构、功能需求、审美偏好、材质偏好、社交需求和隐私需求。
+          </p>
+          <div class="questionnaire-points" data-animate>
+            <div class="questionnaire-point"><strong>01</strong><span>家庭成员、儿童、宠物、未来5-10年家庭结构变化。</span></div>
+            <div class="questionnaire-point"><strong>02</strong><span>日常空间使用、工作学习、收纳、无障碍与特殊需求。</span></div>
+            <div class="questionnaire-point"><strong>03</strong><span>风格、美学、材质质感、当前空间问题和房间细节偏好。</span></div>
+          </div>
+        </div>
+        <div class="questionnaire-gallery" data-animate aria-label="客户需求问卷截图">
+          <button class="questionnaire-card gallery-card" type="button" data-lightbox-group="questionnaire" data-lightbox-src="./assets/questionnaire/questionnaire-01.jpg" data-lightbox-caption="客户需求问卷 01：家庭成员、日常空间使用、生活方式优先级" aria-label="放大查看客户需求问卷 01">
+            <img src="./assets/questionnaire/questionnaire-01.jpg" alt="客户需求问卷：家庭成员、日常空间使用、生活方式优先级" />
+          </button>
+          <button class="questionnaire-card gallery-card" type="button" data-lightbox-group="questionnaire" data-lightbox-src="./assets/questionnaire/questionnaire-02.jpg" data-lightbox-caption="客户需求问卷 02：灵感与当前空间、偏好设计风格、材质与质感" aria-label="放大查看客户需求问卷 02">
+            <img src="./assets/questionnaire/questionnaire-02.jpg" alt="客户需求问卷：灵感与当前空间、偏好设计风格、材质与质感" />
+          </button>
+          <button class="questionnaire-card gallery-card" type="button" data-lightbox-group="questionnaire" data-lightbox-src="./assets/questionnaire/questionnaire-03.jpg" data-lightbox-caption="客户需求问卷 03：风格与美学偏好、灵感来源、当前空间评估" aria-label="放大查看客户需求问卷 03">
+            <img src="./assets/questionnaire/questionnaire-03.jpg" alt="客户需求问卷：风格与美学偏好、灵感来源、当前空间评估" />
+          </button>
+          <button class="questionnaire-card gallery-card" type="button" data-lightbox-group="questionnaire" data-lightbox-src="./assets/questionnaire/questionnaire-04.jpg" data-lightbox-caption="客户需求问卷 04：房间细节客厅、主要功能、当前问题、理想氛围" aria-label="放大查看客户需求问卷 04">
+            <img src="./assets/questionnaire/questionnaire-04.jpg" alt="客户需求问卷：房间细节客厅、主要功能、当前问题、理想氛围" />
+          </button>
+          <button class="questionnaire-card gallery-card" type="button" data-lightbox-group="questionnaire" data-lightbox-src="./assets/questionnaire/questionnaire-05.jpg" data-lightbox-caption="客户需求问卷 05：房间细节厨房、布局、烹饪设备、收纳与氛围" aria-label="放大查看客户需求问卷 05">
+            <img src="./assets/questionnaire/questionnaire-05.jpg" alt="客户需求问卷：房间细节厨房、布局、烹饪设备、收纳与氛围" />
+          </button>
+        </div>
+      </section>
+
+      <section class="slide gallery-slide" data-label="Space Intent Gallery">
+        <div class="gallery-head" data-animate>
+          <div>
+            <p class="kicker">07 · Space Intent Gallery</p>
+            <h1>空间意向图集</h1>
+          </div>
+        </div>
+        <div class="intent-carousel" data-intent-carousel data-animate aria-label="托斯卡纳空间意向图集">
+          <button class="intent-stage gallery-card" type="button" data-intent-stage aria-label="放大查看当前空间意向图">
+            <img data-intent-stage-img src="" alt="空间意向图" loading="eager" decoding="async" />
+            <span class="intent-stage-label" data-intent-stage-label>空间意向 01</span>
+            <span class="intent-stage-count" data-intent-stage-count>01 / 22</span>
+          </button>
+          <div class="intent-side">
+            <div class="intent-actions" aria-label="空间意向翻页">
+              <button class="intent-action" type="button" data-intent-prev aria-label="上一张空间意向图">
+                <svg viewBox="0 0 24 24"><path d="M15 5 8 12l7 7" /></svg>
+              </button>
+              <div class="intent-progress" data-intent-progress>01 / 22</div>
+              <button class="intent-action" type="button" data-intent-next aria-label="下一张空间意向图">
+                <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7" /></svg>
+              </button>
+            </div>
+            <div class="intent-rail" data-intent-rail aria-label="空间意向缩略图"></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="hint">键盘 ← / → 控制翻页</div>
+      <nav class="controls" aria-label="幻灯片控制">
+        <button class="nav-button" id="prev" type="button" aria-label="上一页">
+          <svg viewBox="0 0 24 24"><path d="M15 5 8 12l7 7" /></svg>
+        </button>
+        <div class="counter" id="counter">01 / 08</div>
+        <button class="nav-button" id="next" type="button" aria-label="下一页">
+          <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7" /></svg>
+        </button>
+      </nav>
+      <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="图片放大查看" hidden>
+        <button class="lightbox-close" id="lightbox-close" type="button" aria-label="关闭大图">
+          <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" /></svg>
+        </button>
+        <button class="lightbox-button lightbox-prev" id="lightbox-prev" type="button" aria-label="上一张图片">
+          <svg viewBox="0 0 24 24"><path d="M15 5 8 12l7 7" /></svg>
+        </button>
+        <figure class="lightbox-figure">
+          <img class="lightbox-image" id="lightbox-image" src="" alt="" />
+        </figure>
+        <button class="lightbox-button lightbox-next" id="lightbox-next" type="button" aria-label="下一张图片">
+          <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7" /></svg>
+        </button>
+        <div class="lightbox-caption">
+          <span id="lightbox-caption"></span>
+          <span class="lightbox-count" id="lightbox-count"></span>
+        </div>
+      </div>
+    </main>
+
+    <script src="./gsap.min.js"></script>
+    <script>
+      (function() {
+        var slides = Array.from(document.querySelectorAll(".slide"));
+        var prevButton = document.querySelector("#prev");
+        var nextButton = document.querySelector("#next");
+        var counter = document.querySelector("#counter");
+        var metaIndex = document.querySelector("#meta-index");
+        var metaLabel = document.querySelector("#meta-label");
+        var word = "Toscana";
+        var wordmark = document.querySelector(".wordmark");
+        var lightbox = document.querySelector("#lightbox");
+        var lightboxImage = document.querySelector("#lightbox-image");
+        var lightboxCaption = document.querySelector("#lightbox-caption");
+        var lightboxCount = document.querySelector("#lightbox-count");
+        var lightboxClose = document.querySelector("#lightbox-close");
+        var lightboxPrev = document.querySelector("#lightbox-prev");
+        var lightboxNext = document.querySelector("#lightbox-next");
+        var params = new URLSearchParams(window.location.search);
+        var stillMode = params.get("still") === "1";
+        var activeIndex = 0;
+        var activeLightboxGroup = [];
+        var activeLightboxIndex = 0;
+        var lightboxTouchX = 0;
+        var intentCarouselIndex = 0;
+
+        /* ---- data ---- */
+        var referenceImages = Array.from({ length: 22 }, function(_, index) {
+          var number = index + 1;
+          return {
+            src: "./assets/references/reference-" + pad(number) + ".jpg",
+            thumbSrc: "./assets/references/thumbs/reference-" + pad(number) + ".jpg",
+            caption: "托斯卡纳参考图 " + pad(number),
+          };
+        });
+
+        var materialImages = [
+          "陶土砖 / 古堡砖 / 复古地砖",
+          "天然石材 / 灰泥墙面",
+          "铁艺 / 手工陶器",
+          "木梁 / 做旧木饰面",
+          "复古地毯 / 棉麻织物",
+        ].map(function(caption, index) {
+          var number = index + 1;
+          return {
+            src: "./assets/materials/material-" + pad(number) + ".jpg",
+            thumbSrc: "./assets/materials/thumbs/material-" + pad(number) + ".jpg",
+            caption: caption,
+          };
+        });
+
+        /* ---- render galleries ---- */
+        function renderReferenceGalleries() {
+          document.querySelectorAll("[data-reference-gallery]").forEach(function(gallery) {
+            var group = gallery.dataset.referenceGallery;
+            var title = gallery.dataset.referenceTitle || "参考图";
+            var images = group === "material" ? materialImages : referenceImages;
+            gallery.innerHTML = images
+              .map(function(image, index) {
+                var label = group === "material" ? image.caption : title + " " + pad(index + 1);
+                var lbCaption = group === "material" ? "材质参考 " + pad(index + 1) + "：" + image.caption : label;
+                var cardClass = group === "material" ? "reference-card material-reference-card gallery-card" : "reference-card gallery-card";
+                return '<button class="' + cardClass + '" type="button" data-lightbox-group="' + group + '" data-lightbox-src="' + image.src + '" data-lightbox-thumb="' + image.thumbSrc + '" data-lightbox-caption="' + lbCaption + '" aria-label="放大查看' + label + '">'
+                  + (group === "material" ? '<strong>' + image.caption + '</strong>' : "")
+                  + '<img src="' + image.thumbSrc + '" alt="' + label + '" loading="' + (index < 3 ? "eager" : "lazy") + '" decoding="async" />'
+                  + '<span>' + pad(index + 1) + '</span>'
+                  + '</button>';
+              })
+              .join("");
+          });
+        }
+
+        function renderIntentCarousel() {
+          var carousel = document.querySelector("[data-intent-carousel]");
+          if (!carousel) return;
+          var stage = carousel.querySelector("[data-intent-stage]");
+          var stageImage = carousel.querySelector("[data-intent-stage-img]");
+          var stageLabel = carousel.querySelector("[data-intent-stage-label]");
+          var stageCount = carousel.querySelector("[data-intent-stage-count]");
+          var progress = carousel.querySelector("[data-intent-progress]");
+          var rail = carousel.querySelector("[data-intent-rail]");
+          var prevBtn = carousel.querySelector("[data-intent-prev]");
+          var nextBtn = carousel.querySelector("[data-intent-next]");
+
+          rail.innerHTML = referenceImages
+            .map(function(image, index) {
+              var label = "空间意向 " + pad(index + 1);
+              return '<button class="intent-thumb gallery-card" type="button" data-intent-thumb data-intent-index="' + index + '" data-lightbox-group="intent" data-lightbox-src="' + image.src + '" data-lightbox-thumb="' + image.thumbSrc + '" data-lightbox-caption="' + label + '" aria-label="放大查看' + label + '">'
+                + '<img src="' + image.thumbSrc + '" alt="' + label + '" loading="' + (index < 8 ? "eager" : "lazy") + '" decoding="async" />'
+                + '<span>' + pad(index + 1) + '</span>'
+                + '</button>';
+            })
+            .join("");
+
+          function updateIntent(index, shouldScroll) {
+            if (shouldScroll === undefined) shouldScroll = true;
+            intentCarouselIndex = (index + referenceImages.length) % referenceImages.length;
+            var image = referenceImages[intentCarouselIndex];
+            var label = "空间意向 " + pad(intentCarouselIndex + 1);
+            stageImage.src = image.thumbSrc;
+            stageImage.alt = label;
+            stage.dataset.intentSrc = image.src;
+            stageLabel.textContent = label;
+            stageCount.textContent = pad(intentCarouselIndex + 1) + " / " + pad(referenceImages.length);
+            progress.textContent = pad(intentCarouselIndex + 1) + " / " + pad(referenceImages.length);
+            rail.querySelectorAll("[data-intent-thumb]").forEach(function(thumb) {
+              thumb.classList.toggle("is-active", Number(thumb.dataset.intentIndex) === intentCarouselIndex);
+            });
+            if (shouldScroll) {
+              var activeThumb = rail.querySelector('[data-intent-index="' + intentCarouselIndex + '"]');
+              if (activeThumb) activeThumb.scrollIntoView({ block: "nearest", inline: "center", behavior: stillMode ? "auto" : "smooth" });
+            }
+          }
+
+          prevBtn.addEventListener("click", function() { updateIntent(intentCarouselIndex - 1); });
+          nextBtn.addEventListener("click", function() { updateIntent(intentCarouselIndex + 1); });
+          stage.addEventListener("click", function() { openLightbox("intent", referenceImages[intentCarouselIndex].src); });
+          rail.addEventListener("click", function(event) {
+            var thumb = event.target.closest("[data-intent-thumb]");
+            if (!thumb) return;
+            updateIntent(Number(thumb.dataset.intentIndex), false);
+          });
+          updateIntent(0, false);
+        }
+
+        /* ---- lightbox (instant thumbnail → full-res) ---- */
+        var preloadCache = {};
+
+        function preloadImg(url) {
+          if (!url || preloadCache[url]) return;
+          var img = new Image();
+          img.src = url;
+          preloadCache[url] = true;
+        }
+
+        function getGroupItems(group) {
+          return Array.from(document.querySelectorAll('[data-lightbox-group="' + group + '"]')).map(function(item) {
+            return {
+              src: item.dataset.lightboxSrc,
+              thumb: item.dataset.lightboxThumb || item.dataset.lightboxSrc,
+              caption: item.dataset.lightboxCaption || (item.querySelector("img") ? item.querySelector("img").alt : "参考图"),
+            };
+          });
+        }
+
+        function updateLightbox() {
+          var item = activeLightboxGroup[activeLightboxIndex];
+          if (!item) return;
+          var isMobile = window.innerWidth < 760;
+          lightboxCaption.textContent = item.caption;
+          lightboxCount.textContent = pad(activeLightboxIndex + 1) + " / " + pad(activeLightboxGroup.length);
+          /* Mobile: use thumbnail for instant loading. Desktop: use full-res. */
+          lightboxImage.src = isMobile ? (item.thumb || item.src) : item.src;
+          lightboxImage.alt = item.caption;
+
+          /* Preload adjacent full-res images for smooth swiping */
+          var prev = activeLightboxGroup[activeLightboxIndex - 1];
+          var next = activeLightboxGroup[activeLightboxIndex + 1];
+          if (prev) preloadImg(isMobile ? (prev.thumb || prev.src) : prev.src);
+          if (next) preloadImg(isMobile ? (next.thumb || next.src) : next.src);
+        }
+
+        function openLightbox(group, src) {
+          activeLightboxGroup = getGroupItems(group);
+          activeLightboxIndex = Math.max(0, activeLightboxGroup.findIndex(function(item) { return item.src === src; }));
+          updateLightbox();
+          lightbox.hidden = false;
+          document.body.style.overflow = "hidden";
+        }
+
+        function closeLightbox() {
+          lightbox.hidden = true;
+          lightboxImage.src = "";
+          document.body.style.overflow = "";
+        }
+
+        function stepLightbox(direction) {
+          if (!activeLightboxGroup.length) return;
+          activeLightboxIndex = (activeLightboxIndex + direction + activeLightboxGroup.length) % activeLightboxGroup.length;
+          updateLightbox();
+        }
+
+        function pad(value) {
+          return String(value).padStart(2, "0");
+        }
+
+        /* ---- GSAP slide transitions ---- */
+        var currentTimeline = null;
+
+        function resetCover() {
+          wordmark.textContent = "";
+          if (typeof gsap === "undefined") return;
+          gsap.set(".brand-signature", { opacity: 0, y: 8 });
+          gsap.set(".cover .wordmark-wrap", { opacity: 0, y: 9 });
+          gsap.set(".comma-shell", { opacity: 0 });
+          gsap.set(".comma-mark", { scaleY: 0.4, scaleX: 0.86, y: -8, opacity: 0, rotation: 0 });
+          gsap.set(".cover-copy", { opacity: 0, y: 18 });
+          gsap.set(".cover-footer", { opacity: 0, y: 18 });
+          gsap.set(".cover .image-slot", { opacity: 0, y: 28 });
+          gsap.set(".ambient-hairline", { opacity: 0, scaleX: 0.3 });
+        }
+
+        function playCover() {
+          resetCover();
+          if (typeof gsap === "undefined" || stillMode) {
+            wordmark.textContent = word;
+            if (typeof gsap !== "undefined") {
+              gsap.set(".cover .wordmark-wrap", { opacity: 1, y: -8 });
+              gsap.set(".brand-signature", { opacity: 1, y: 0 });
+              gsap.set(".comma-shell", { opacity: 1 });
+              gsap.set(".comma-mark", { scaleY: 1, scaleX: 1, y: 0, opacity: 1, rotation: 0 });
+              gsap.set(".cover-copy", { opacity: 1, y: 0 });
+              gsap.set(".cover-footer", { opacity: 1, y: 0 });
+              gsap.set(".cover .image-slot", { opacity: 0.48, y: 0 });
+              gsap.set(".ambient-hairline", { opacity: 0.55, scaleX: 1 });
+            }
+            return null;
+          }
+          var tl = gsap.timeline();
+          tl.to(".cover .wordmark-wrap", { opacity: 1, y: 0, duration: 0.72, ease: "power2.out" }, 0);
+          tl.to(".brand-signature", { opacity: 1, y: 0, duration: 0.72, ease: "power2.out" }, 0.1);
+          for (var i = 1; i <= word.length; i += 1) {
+            tl.call(function(j) { wordmark.textContent = word.slice(0, j); }.bind(null, i), null, 0.28 + i * 0.16);
+          }
+          tl.to(".comma-shell", { opacity: 1, duration: 0.2, ease: "none" }, 1.76);
+          tl.to(".comma-mark", { scaleY: 1, scaleX: 1, y: 0, opacity: 1, duration: 0.74, ease: "elastic.out(1, 0.55)" }, 1.78);
+          tl.to(".comma-shell", { opacity: 0.18, duration: 0.24, ease: "none" }, 2.55);
+          tl.to(".comma-shell", { opacity: 1, duration: 0.42, ease: "sine.out" }, 2.82);
+          tl.to(".ambient-hairline", { opacity: 0.65, scaleX: 1, duration: 1.3, ease: "power3.out" }, 3.36);
+          tl.to(".cover-copy", { opacity: 1, y: 0, duration: 0.95, ease: "power3.out" }, 3.72);
+          tl.to(".cover .image-slot", { y: 0, opacity: 0.48, duration: 1.25, stagger: 0.12, ease: "power3.out" }, 4.22);
+          tl.to(".cover-footer", { y: 0, opacity: 1, duration: 0.82, ease: "power2.out" }, 4.9);
+          return tl;
+        }
+
+        function playStandard(slide) {
+          var animated = slide.querySelectorAll("[data-animate]");
+          if (typeof gsap === "undefined") return null;
+          var tl = gsap.timeline();
+          if (stillMode) {
+            gsap.set(animated, { opacity: 1, y: 0 });
+            gsap.set(slide.querySelectorAll(".rule"), { scaleX: 1 });
+            return tl;
+          }
+          gsap.set(animated, { opacity: 0, y: 30 });
+          gsap.set(slide.querySelectorAll(".rule"), { scaleX: 0 });
+          tl.to(animated, { opacity: 1, y: 0, duration: 0.82, stagger: 0.12, ease: "power3.out" }, 0.08);
+          tl.to(slide.querySelectorAll(".rule"), { scaleX: 1, duration: 0.9, ease: "power3.out" }, 0.58);
+          return tl;
+        }
+
+        function showSlide(index, direction) {
+          if (direction === undefined) direction = 1;
+          var nextIndex = Math.max(0, Math.min(index, slides.length - 1));
+          if (nextIndex === activeIndex && slides[nextIndex].classList.contains("has-played")) return;
+          if (currentTimeline) currentTimeline.kill();
+
+          var outgoing = slides[activeIndex];
+          var incoming = slides[nextIndex];
+          var offset = direction >= 0 ? 26 : -26;
+
+          /* Force visibility via native JS — never rely on GSAP for show/hide */
+          slides.forEach(function(slide, i) {
+            slide.style.opacity = i === nextIndex ? '' : '0';
+            slide.style.pointerEvents = i === nextIndex ? '' : 'none';
+            slide.classList.toggle("is-active", i === nextIndex);
+          });
+          incoming.scrollTop = 0;
+
+          if (typeof gsap !== "undefined" && !stillMode && outgoing !== incoming) {
+            gsap.fromTo(incoming, { opacity: 0, y: offset }, { opacity: 1, y: 0, duration: 0.62, ease: "power3.out" });
+          }
+
+          activeIndex = nextIndex;
+          incoming.classList.add("has-played");
+          counter.textContent = pad(activeIndex + 1) + " / " + pad(slides.length);
+          metaIndex.textContent = pad(activeIndex + 1);
+          metaLabel.textContent = incoming.dataset.label || "Design Demo";
+          prevButton.disabled = activeIndex === 0;
+          nextButton.disabled = activeIndex === slides.length - 1;
+          try {
+            var url = new URL(window.location.href);
+            url.searchParams.set("slide", String(activeIndex + 1));
+            window.history.replaceState(null, "", url);
+          } catch(e) {}
+
+          currentTimeline = activeIndex === 0 ? playCover() : playStandard(incoming);
+        }
+
+        /* ---- event listeners ---- */
+        prevButton.addEventListener("click", function() { showSlide(activeIndex - 1, -1); });
+        nextButton.addEventListener("click", function() { showSlide(activeIndex + 1, 1); });
+
+        document.addEventListener("click", function(event) {
+          var trigger = event.target.closest("[data-lightbox-group]");
+          if (!trigger) return;
+          event.preventDefault();
+          openLightbox(trigger.dataset.lightboxGroup, trigger.dataset.lightboxSrc);
+        });
+
+        lightboxClose.addEventListener("click", closeLightbox);
+        lightboxPrev.addEventListener("click", function() { stepLightbox(-1); });
+        lightboxNext.addEventListener("click", function() { stepLightbox(1); });
+        lightbox.addEventListener("click", function(event) {
+          if (event.target === lightbox) closeLightbox();
+        });
+        lightbox.addEventListener("touchstart", function(event) {
+          lightboxTouchX = event.touches[0] ? event.touches[0].clientX : 0;
+        });
+        lightbox.addEventListener("touchend", function(event) {
+          var endX = event.changedTouches[0] ? event.changedTouches[0].clientX : 0;
+          if (Math.abs(endX - lightboxTouchX) > 48) stepLightbox(endX - lightboxTouchX > 0 ? -1 : 1);
+        });
+
+        window.addEventListener("keydown", function(event) {
+          if (!lightbox.hidden) {
+            if (event.key === "Escape") closeLightbox();
+            if (event.key === "ArrowRight") stepLightbox(1);
+            if (event.key === "ArrowLeft") stepLightbox(-1);
+            return;
+          }
+          if (event.key === "ArrowRight" || event.key === "PageDown" || event.key === " ") {
+            event.preventDefault();
+            showSlide(activeIndex + 1, 1);
+          }
+          if (event.key === "ArrowLeft" || event.key === "PageUp") {
+            event.preventDefault();
+            showSlide(activeIndex - 1, -1);
+          }
+          if (event.key === "Home") showSlide(0, -1);
+          if (event.key === "End") showSlide(slides.length - 1, 1);
+        });
+
+        /* ---- init ---- */
+        renderReferenceGalleries();
+        renderIntentCarousel();
+        var requestedSlide = Number(params.get("slide"));
+        var initial = Number.isFinite(requestedSlide) && requestedSlide > 0
+          ? Math.min(Math.max(Math.floor(requestedSlide) - 1, 0), slides.length - 1)
+          : 0;
+        showSlide(initial, 1);
+      })();
+    </script>
+  </body>
+</html>
