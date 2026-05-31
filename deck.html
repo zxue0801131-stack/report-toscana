@@ -2490,16 +2490,18 @@
         function updateLightbox() {
           var item = activeLightboxGroup[activeLightboxIndex];
           if (!item) return;
+          var isMobile = window.innerWidth < 760;
           lightboxCaption.textContent = item.caption;
           lightboxCount.textContent = pad(activeLightboxIndex + 1) + " / " + pad(activeLightboxGroup.length);
-          lightboxImage.src = item.src;
+          /* Mobile: use thumbnail for instant loading. Desktop: use full-res. */
+          lightboxImage.src = isMobile ? (item.thumb || item.src) : item.src;
           lightboxImage.alt = item.caption;
 
-          /* Preload adjacent images for smooth swiping */
+          /* Preload adjacent full-res images for smooth swiping */
           var prev = activeLightboxGroup[activeLightboxIndex - 1];
           var next = activeLightboxGroup[activeLightboxIndex + 1];
-          if (prev) preloadImg(prev.src);
-          if (next) preloadImg(next.src);
+          if (prev) preloadImg(isMobile ? (prev.thumb || prev.src) : prev.src);
+          if (next) preloadImg(isMobile ? (next.thumb || next.src) : next.src);
         }
 
         function openLightbox(group, src) {
