@@ -2601,17 +2601,15 @@
           var incoming = slides[nextIndex];
           var offset = direction >= 0 ? 26 : -26;
 
+          /* Force visibility via native JS — never rely on GSAP for show/hide */
           slides.forEach(function(slide, i) {
+            slide.style.opacity = i === nextIndex ? '' : '0';
+            slide.style.pointerEvents = i === nextIndex ? '' : 'none';
             slide.classList.toggle("is-active", i === nextIndex);
           });
           incoming.scrollTop = 0;
-          slides.forEach(function(slide) {
-            if (slide !== incoming && typeof gsap !== "undefined") gsap.set(slide, { opacity: 0, y: 0 });
-          });
 
-          if (typeof gsap === "undefined" || stillMode) {
-            gsap && gsap.set(incoming, { opacity: 1, y: 0 });
-          } else if (outgoing !== incoming) {
+          if (typeof gsap !== "undefined" && !stillMode && outgoing !== incoming) {
             gsap.fromTo(incoming, { opacity: 0, y: offset }, { opacity: 1, y: 0, duration: 0.62, ease: "power3.out" });
           }
 
