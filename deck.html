@@ -1560,12 +1560,8 @@
 
         .slide {
           padding: max(64px, calc(env(safe-area-inset-top) + 50px)) 8vw
-            calc(118px + env(safe-area-inset-bottom));
+            calc(98px + env(safe-area-inset-bottom));
           touch-action: pan-y;
-        }
-
-        .slide * {
-          min-width: 0;
         }
 
         .slide h1,
@@ -1574,8 +1570,7 @@
         .slide strong,
         .slide span {
           max-width: 100%;
-          overflow-wrap: anywhere;
-          word-break: break-word;
+          overflow-wrap: break-word;
         }
 
         .top-meta {
@@ -1608,7 +1603,6 @@
           margin-inline: auto;
           font-size: clamp(20px, 5.2vw, 24px);
           line-height: 1.24;
-          word-break: break-all;
         }
 
         .cover-title span {
@@ -1653,7 +1647,6 @@
         .title-large {
           font-size: clamp(34px, 9.2vw, 42px);
           line-height: 1.08;
-          word-break: break-all;
         }
 
         .note {
@@ -1797,7 +1790,7 @@
           width: min(100%, 76vw);
           font-size: clamp(16px, 4vw, 19px);
           line-height: 1.46;
-          word-break: break-all;
+          overflow-wrap: break-word;
         }
 
         .feature-detail-list {
@@ -1823,14 +1816,14 @@
           font-size: clamp(24px, 6.6vw, 31px);
           line-height: 1.2;
           overflow-wrap: anywhere;
-          word-break: break-all;
+          overflow-wrap: break-word;
         }
 
         .feature-body p {
           width: 100%;
           font-size: clamp(15px, 4vw, 17px);
           line-height: 1.62;
-          word-break: break-all;
+          overflow-wrap: break-word;
         }
 
         .feature-body blockquote {
@@ -1838,7 +1831,7 @@
           padding-left: 16px;
           font-size: clamp(17px, 4.5vw, 21px);
           line-height: 1.42;
-          word-break: break-all;
+          overflow-wrap: break-word;
         }
 
         .transfer {
@@ -1892,7 +1885,7 @@
         .questionnaire-point span {
           font-size: clamp(15px, 3.9vw, 17px);
           line-height: 1.5;
-          word-break: break-all;
+          overflow-wrap: break-word;
         }
 
         .questionnaire-card {
