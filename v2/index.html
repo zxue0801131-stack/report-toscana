@@ -614,6 +614,10 @@
         bottom: 5%;
       }
 
+      .map-mobile-list {
+        display: none;
+      }
+
       .feature-strip {
         display: grid;
         grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -1745,6 +1749,48 @@
           gap: 14px;
         }
 
+        .map-slide {
+          align-content: start;
+          overflow-x: hidden;
+        }
+
+        .map-copy {
+          width: 100%;
+          max-width: none;
+          min-width: 0;
+          overflow: hidden;
+        }
+
+        .map-copy .title-large {
+          width: 100%;
+          font-size: clamp(40px, 12vw, 50px);
+          line-height: 1.06;
+          overflow-wrap: anywhere;
+          word-break: break-all;
+        }
+
+        .map-copy .title-large span {
+          display: block;
+        }
+
+        .map-copy .note {
+          width: 100%;
+          margin-top: 20px;
+          font-size: clamp(16px, 4.25vw, 18px);
+          line-height: 1.5;
+          overflow-wrap: anywhere;
+          word-break: break-all;
+        }
+
+        .map-copy .quote {
+          width: 100%;
+          margin-top: 18px;
+          font-size: clamp(15px, 4vw, 17px);
+          line-height: 1.42;
+          overflow-wrap: anywhere;
+          word-break: break-all;
+        }
+
         .metric,
         .material-card,
         .route-step {
@@ -1760,29 +1806,50 @@
         }
 
         .map-canvas {
-          min-height: 520px;
-        }
-
-        .map-ring,
-        .map-line {
           display: none;
         }
 
-        .map-node {
-          position: relative;
-          inset: auto;
+        .map-mobile-list {
+          display: grid;
+          gap: 10px;
           width: 100%;
-          min-height: 0;
-          margin-bottom: 12px;
-          border-radius: 0;
+          margin-top: 22px;
+          padding-bottom: 72px;
         }
 
-        .map-node.center {
-          left: auto;
-          top: auto;
-          width: 100%;
-          min-height: 0;
-          transform: none;
+        .map-mobile-item {
+          display: grid;
+          grid-template-columns: 38px minmax(0, 1fr);
+          gap: 12px;
+          padding: 14px 0;
+          border-top: 1px solid var(--hairline);
+        }
+
+        .map-mobile-item:last-child {
+          border-bottom: 1px solid var(--hairline);
+        }
+
+        .map-mobile-item em {
+          font-family: var(--sans);
+          font-size: 12px;
+          line-height: 1.2;
+          color: var(--soft-ink);
+          font-style: normal;
+        }
+
+        .map-mobile-item strong {
+          display: block;
+          font-size: clamp(21px, 5.8vw, 25px);
+          line-height: 1.15;
+          font-weight: 400;
+        }
+
+        .map-mobile-item span {
+          display: block;
+          margin-top: 4px;
+          font-size: 13px;
+          line-height: 1.38;
+          color: var(--soft-ink);
         }
 
         .question-slide {
@@ -2136,7 +2203,7 @@
       <section class="slide map-slide" data-label="Renaissance Map">
         <div class="map-copy">
           <p class="kicker" data-animate>01 · Renaissance Evolution</p>
-          <h1 class="title-large" data-animate>从中世纪到文艺复兴</h1>
+          <h1 class="title-large" data-animate><span>从中世纪到</span><span>文艺复兴</span></h1>
           <p class="note" data-animate>
             这一页先不直接讲托斯卡纳，而是建立它背后的历史来源：欧洲空间审美从中世纪的神性秩序，进入文艺复兴后，开始重新发现“人、比例、光线与自然”。
             <br /><br />
@@ -2146,6 +2213,13 @@
           </p>
           <div class="quote" data-animate>
             <strong>先把文艺复兴的空间逻辑讲清楚，下一页再落到托斯卡纳为什么会形成这种生活美学。</strong>
+          </div>
+          <div class="map-mobile-list" data-animate aria-label="文艺复兴空间逻辑五点">
+            <div class="map-mobile-item"><em>01</em><div><strong>中世纪</strong><span>信仰、崇高、厚重，空间服务宗教秩序</span></div></div>
+            <div class="map-mobile-item"><em>02</em><div><strong>文艺复兴</strong><span>14—16世纪意大利，从神性转向人、比例、光线与自然</span></div></div>
+            <div class="map-mobile-item"><em>03</em><div><strong>绘画</strong><span>透视法建立深度，画面开始拥有真实空间</span></div></div>
+            <div class="map-mobile-item"><em>04</em><div><strong>建筑</strong><span>圆拱、穹顶、柱式，对称、轴线与几何秩序</span></div></div>
+            <div class="map-mobile-item"><em>05</em><div><strong>托斯卡纳</strong><span>作为下一页展开的地域风格分支</span></div></div>
           </div>
         </div>
         <div class="map-canvas" data-animate>
