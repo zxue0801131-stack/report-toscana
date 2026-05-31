@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Toscana Cover</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #faf8f1;
+        --ink: #080806;
+        --soft-ink: rgba(8, 8, 6, 0.48);
+        --hairline: rgba(8, 8, 6, 0.18);
+        --warm-shadow: rgba(55, 39, 22, 0.08);
+        --serif: "Cormorant Garamond", "Bodoni 72", Didot, Georgia, serif;
+        --wordmark-size: clamp(84px, 12.4vw, 228px);
+        --cover-title-size: clamp(26px, 2.55vw, 46px);
+        --meta-size: clamp(14px, 1vw, 18px);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: var(--serif);
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        user-select: none;
+      }
+
+      #toscana-cover {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: var(--bg);
+      }
+
+      .scene-content {
+        position: relative;
+        display: flex;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        padding: max(22px, env(safe-area-inset-top)) max(22px, env(safe-area-inset-right))
+          max(22px, env(safe-area-inset-bottom)) max(22px, env(safe-area-inset-left));
+      }
+
+      .plaster-grain {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        opacity: 0.22;
+        background-image:
+          linear-gradient(var(--warm-shadow) 1px, transparent 1px),
+          linear-gradient(90deg, var(--warm-shadow) 1px, transparent 1px);
+        background-size: 47px 47px;
+        mask-image: radial-gradient(circle at center, transparent 0, rgba(0, 0, 0, 0.22) 72%);
+      }
+
+      .wordmark-wrap {
+        position: relative;
+        z-index: 2;
+        display: inline-flex;
+        align-items: baseline;
+        justify-content: center;
+        min-width: min(92vw, 12ch);
+        font-size: var(--wordmark-size);
+        line-height: 0.92;
+        letter-spacing: 0;
+        font-weight: 400;
+        font-feature-settings: "liga" 1, "kern" 1;
+        will-change: transform, opacity;
+      }
+
+      .wordmark {
+        min-width: 0;
+        white-space: nowrap;
+      }
+
+      .comma-shell {
+        position: relative;
+        display: inline-flex;
+        width: 0.4em;
+        height: 0.76em;
+        margin-left: 0.015em;
+        align-items: flex-end;
+        justify-content: center;
+        opacity: 0;
+        will-change: transform, opacity;
+      }
+
+      .comma-svg {
+        width: 0.34em;
+        height: 0.48em;
+        overflow: visible;
+      }
+
+      .comma-mark {
+        fill: none;
+        stroke: var(--ink);
+        stroke-width: 8.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        transform-origin: 50% 35%;
+      }
+
+      .cover-mark {
+        position: fixed;
+        z-index: 10;
+        top: max(28px, env(safe-area-inset-top));
+        right: max(34px, env(safe-area-inset-right));
+        display: flex;
+        gap: 9px;
+        align-items: baseline;
+        font-size: var(--meta-size);
+        line-height: 1;
+        color: var(--ink);
+        opacity: 0;
+        will-change: transform, opacity;
+      }
+
+      .cover-mark .muted {
+        color: var(--soft-ink);
+      }
+
+      .cover-copy {
+        position: absolute;
+        z-index: 3;
+        left: 50%;
+        bottom: 17vh;
+        width: min(760px, 78vw);
+        transform: translateX(-50%);
+        text-align: center;
+        color: var(--ink);
+        pointer-events: none;
+      }
+
+      .cover-title {
+        margin: 0;
+        font-size: var(--cover-title-size);
+        line-height: 1.08;
+        font-weight: 400;
+        letter-spacing: 0;
+        opacity: 0;
+        will-change: transform, opacity;
+      }
+
+      .cover-subtitle {
+        margin: 16px 0 0;
+        font-size: clamp(17px, 1.25vw, 22px);
+        line-height: 1.35;
+        color: var(--soft-ink);
+        font-style: italic;
+        opacity: 0;
+        will-change: transform, opacity;
+      }
+
+      .cover-footer {
+        position: fixed;
+        z-index: 4;
+        left: max(34px, env(safe-area-inset-left));
+        right: max(34px, env(safe-area-inset-right));
+        bottom: max(26px, env(safe-area-inset-bottom));
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 24px;
+        font-size: var(--meta-size);
+        line-height: 1;
+        color: var(--soft-ink);
+        opacity: 0;
+        will-change: transform, opacity;
+      }
+
+      .ambient-hairline {
+        position: absolute;
+        left: 50%;
+        bottom: 7.5vh;
+        width: min(420px, 38vw);
+        height: 1px;
+        background: var(--hairline);
+        opacity: 0;
+        transform: translateX(-50%) scaleX(0.3);
+        transform-origin: center;
+        will-change: transform, opacity;
+      }
+
+      .image-slots {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .image-slot {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--hairline);
+        color: rgba(8, 8, 6, 0.56);
+        font-size: clamp(14px, 1.15vw, 20px);
+        font-style: italic;
+        letter-spacing: 0;
+        opacity: 0;
+        overflow: hidden;
+        background: rgba(250, 248, 241, 0.42);
+        will-change: transform, opacity;
+      }
+
+      .image-slot::before {
+        content: "";
+        position: absolute;
+        inset: 12px;
+        border: 1px solid rgba(8, 8, 6, 0.08);
+      }
+
+      .image-slot span {
+        position: relative;
+        z-index: 1;
+      }
+
+      .slot-garden {
+        width: min(23vw, 360px);
+        aspect-ratio: 4 / 5;
+        left: 7vw;
+        top: 14vh;
+      }
+
+      .slot-material {
+        width: min(17vw, 265px);
+        aspect-ratio: 1 / 1;
+        right: 8.5vw;
+        top: 17vh;
+      }
+
+      .slot-furniture {
+        width: min(31vw, 500px);
+        aspect-ratio: 16 / 7;
+        right: 8.5vw;
+        bottom: 15vh;
+      }
+
+      @media (max-width: 700px) {
+        :root {
+          --wordmark-size: clamp(70px, 20vw, 126px);
+          --cover-title-size: clamp(23px, 6.6vw, 34px);
+        }
+
+        .cover-mark {
+          top: max(18px, env(safe-area-inset-top));
+          right: max(20px, env(safe-area-inset-right));
+        }
+
+        .slot-garden {
+          width: 28vw;
+          left: 5vw;
+          top: 18vh;
+        }
+
+        .slot-material {
+          width: 28vw;
+          right: 5vw;
+          top: 18vh;
+        }
+
+        .slot-furniture {
+          width: 54vw;
+          right: 23vw;
+          bottom: 8vh;
+        }
+
+        .image-slot {
+          font-size: 13px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="toscana-cover" data-composition-id="toscana-cover" data-start="0" data-width="1920" data-height="1080" data-duration="10">
+      <div class="scene-content">
+        <div class="plaster-grain" data-layout-ignore=""></div>
+        <div class="image-slots" aria-hidden="true">
+          <div class="image-slot slot-garden" data-image-slot="garden-pool-old-trees">
+            <span>庭院 · 老树 · 泳池</span>
+          </div>
+          <div class="image-slot slot-material" data-image-slot="materials-detail">
+            <span>材质细节</span>
+          </div>
+          <div class="image-slot slot-furniture" data-image-slot="furniture-scene">
+            <span>家具场景</span>
+          </div>
+        </div>
+        <div class="cover-mark" aria-hidden="true">
+          <span>01</span>
+          <span class="muted">Design Demo</span>
+        </div>
+        <div class="wordmark-wrap" aria-label="Toscana,">
+          <span class="wordmark" aria-hidden="true"></span>
+          <span class="comma-shell" aria-hidden="true">
+            <svg class="comma-svg" viewBox="0 0 64 90">
+              <path class="comma-mark" d="M38 18 C21 34 20 55 33 64 C39 68 43 65 39 58 C35 51 27 52 24 60" />
+            </svg>
+          </span>
+        </div>
+        <div class="cover-copy">
+          <h1 class="cover-title">旧金山湾区私宅设计提案</h1>
+          <p class="cover-subtitle">Stanford Area · Tuscan Quiet Luxury Villa</p>
+        </div>
+        <div class="ambient-hairline" data-layout-ignore=""></div>
+        <div class="cover-footer" aria-hidden="true">
+          <span>Tuscan Natural Luxury</span>
+          <span>Interior · Landscape · Furniture Direction</span>
+        </div>
+      </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+      
+    </div>
+  <script>window.__timelines = window.__timelines || {};
+
+        const word = "Toscana";
+        const wordmark = document.querySelector(".wordmark");
+        const commaShell = document.querySelector(".comma-shell");
+        const commaMark = document.querySelector(".comma-mark");
+
+        function setWord(count) {
+          wordmark.textContent = word.slice(0, count);
+        }
+
+        gsap.set(".wordmark-wrap", { y: 0, opacity: 1 });
+        gsap.set(".image-slot", { y: 28, opacity: 0 });
+        gsap.set([".cover-title", ".cover-subtitle", ".cover-mark", ".cover-footer"], { y: 18, opacity: 0 });
+
+        const tl = gsap.timeline({ paused: true });
+
+        tl.set(wordmark, { textContent: "" }, 0);
+        for (let i = 1; i <= word.length; i += 1) {
+          tl.call(setWord, [i], i === 1 ? 0.52 : 0.52 + i * 0.18);
+        }
+        tl.from(".wordmark-wrap", { opacity: 0, y: 9, duration: 0.72, ease: "power2.out" }, 0.24);
+        tl.to(commaShell, { opacity: 1, duration: 0.2, ease: "none" }, 2.05);
+        tl.fromTo(
+          commaMark,
+          { scaleY: 0.4, scaleX: 0.86, y: -8, opacity: 0 },
+          { scaleY: 1, scaleX: 1, y: 0, opacity: 1, duration: 0.74, ease: "elastic.out(1, 0.55)" },
+          2.08,
+        );
+        tl.to(commaShell, { opacity: 0.18, duration: 0.24, ease: "none" }, 2.86);
+        tl.to(commaShell, { opacity: 1, duration: 0.42, ease: "sine.out" }, 3.1);
+        tl.to(commaMark, { scaleX: 0.96, scaleY: 1.04, rotation: -1.2, duration: 1.15, ease: "sine.inOut" }, 3.16);
+        tl.to(commaMark, { scaleX: 1, scaleY: 1, rotation: 0, duration: 1.15, ease: "sine.inOut" }, 4.31);
+        tl.to(".cover-mark", { y: 0, opacity: 1, duration: 0.9, ease: "power2.out" }, 3.55);
+        tl.to(".ambient-hairline", { opacity: 0.65, scaleX: 1, duration: 1.3, ease: "power3.out" }, 4.0);
+        tl.to(".cover-title", { y: 0, opacity: 1, duration: 0.95, ease: "power3.out" }, 4.32);
+        tl.to(".cover-subtitle", { y: 0, opacity: 1, duration: 0.9, ease: "power3.out" }, 4.62);
+        tl.to(".image-slot", { y: 0, opacity: 0.48, duration: 1.25, stagger: 0.12, ease: "power3.out" }, 5.05);
+        tl.to(".cover-footer", { y: 0, opacity: 1, duration: 0.82, ease: "power2.out" }, 5.72);
+        tl.to(".wordmark-wrap", { y: -8, duration: 2.2, ease: "sine.inOut" }, 6.2);
+        tl.to(".ambient-hairline", { opacity: 0.32, scaleX: 0.82, duration: 2.4, ease: "sine.inOut" }, 6.5);
+        tl.to(commaMark, { scaleX: 1.02, scaleY: 0.98, rotation: 0.6, duration: 1.6, ease: "sine.inOut" }, 7.2);
+        tl.to(commaMark, { scaleX: 1, scaleY: 1, rotation: 0, duration: 1.1, ease: "sine.inOut" }, 8.8);
+        tl.to(".ambient-hairline", { opacity: 0.55, scaleX: 1, duration: 0.95, ease: "sine.inOut" }, 8.95);
+
+        window.__timelines["toscana-cover"] = tl;</script></body>
+</html>
