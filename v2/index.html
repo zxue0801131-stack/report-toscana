@@ -618,6 +618,10 @@
         display: none;
       }
 
+      .map-mobile-story {
+        display: none;
+      }
+
       .feature-strip {
         display: grid;
         grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -1752,13 +1756,15 @@
         .map-slide {
           align-content: start;
           overflow-x: hidden;
+          padding-top: max(76px, calc(env(safe-area-inset-top) + 58px));
+          padding-bottom: calc(112px + env(safe-area-inset-bottom));
         }
 
         .map-copy {
-          width: 100%;
-          max-width: none;
+          width: min(100%, 19.5rem);
+          max-width: 100%;
           min-width: 0;
-          overflow: hidden;
+          overflow: visible;
         }
 
         .map-copy .title-large {
@@ -1771,6 +1777,43 @@
 
         .map-copy .title-large span {
           display: block;
+        }
+
+        .map-copy > .note,
+        .map-copy > .quote {
+          display: none;
+        }
+
+        .map-mobile-story {
+          display: grid;
+          gap: 16px;
+          margin-top: 26px;
+        }
+
+        .map-story-card {
+          padding: 18px 0 20px;
+          border-top: 1px solid var(--hairline);
+        }
+
+        .map-story-card:first-child {
+          padding-top: 0;
+          border-top: 0;
+        }
+
+        .map-story-card h2 {
+          margin: 0 0 10px;
+          font-size: clamp(23px, 6.4vw, 29px);
+          line-height: 1.14;
+          font-weight: 400;
+        }
+
+        .map-story-card p {
+          width: 100%;
+          margin: 0;
+          font-size: clamp(16px, 4.2vw, 18px);
+          line-height: 1.72;
+          color: var(--mid-ink);
+          overflow-wrap: anywhere;
         }
 
         .map-copy .note {
@@ -1811,17 +1854,17 @@
 
         .map-mobile-list {
           display: grid;
-          gap: 10px;
+          gap: 0;
           width: 100%;
-          margin-top: 22px;
-          padding-bottom: 72px;
+          margin-top: 26px;
+          padding-bottom: 96px;
         }
 
         .map-mobile-item {
           display: grid;
           grid-template-columns: 38px minmax(0, 1fr);
           gap: 12px;
-          padding: 14px 0;
+          padding: 18px 0;
           border-top: 1px solid var(--hairline);
         }
 
@@ -2204,6 +2247,24 @@
         <div class="map-copy">
           <p class="kicker" data-animate>01 · Renaissance Evolution</p>
           <h1 class="title-large" data-animate><span>从中世纪到</span><span>文艺复兴</span></h1>
+          <div class="map-mobile-story" data-animate aria-label="文艺复兴背景分段阅读">
+            <article class="map-story-card">
+              <h2>先建立历史来源</h2>
+              <p>这一页先不直接讲托斯卡纳，而是建立它背后的历史来源：欧洲空间审美从中世纪的神性秩序，进入文艺复兴后，开始重新发现人、比例、光线与自然。</p>
+            </article>
+            <article class="map-story-card">
+              <h2>中世纪的空间秩序</h2>
+              <p>中世纪建筑更强调信仰与崇高感，空间常以高耸、厚重、神圣的方式，让人感受到宗教秩序的力量。</p>
+            </article>
+            <article class="map-story-card">
+              <h2>文艺复兴转向人的尺度</h2>
+              <p>进入14—16世纪的意大利文艺复兴后，审美中心开始转向人。佛罗伦萨成为重要现场，比例、圆拱、柱式与几何秩序重新被研究。</p>
+            </article>
+            <article class="map-story-card">
+              <h2>从建筑延展到生活</h2>
+              <p>从这里开始，文艺复兴审美分化到绘画、建筑、室内与生活艺术之中。家具、织物、器物和墙面共同参与身份与生活秩序的表达。</p>
+            </article>
+          </div>
           <p class="note" data-animate>
             这一页先不直接讲托斯卡纳，而是建立它背后的历史来源：欧洲空间审美从中世纪的神性秩序，进入文艺复兴后，开始重新发现“人、比例、光线与自然”。
             <br /><br />
